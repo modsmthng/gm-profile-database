@@ -33,8 +33,8 @@ const profilePath = `/gm-profile-database/profiles/${profileName}/${variantFile}
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
     <div>
-      <h3 class="font-bold">Failed to load chart</h3>
-      <p class="text-sm">Unable to load profile data</p>
+      <h3 class="font-bold">Chart unavailable</h3>
+      <p class="text-sm"></p>
     </div>
     <button class="btn btn-sm" onclick="window.retryChart()">Retry</button>
   </div>
@@ -51,13 +51,15 @@ const profilePath = `/gm-profile-database/profiles/${profileName}/${variantFile}
 
   let chartInstance: Chart | null = null;
 
-  async function loadProfileChart() {
-    const container = document.querySelector('.chart-container') as HTMLElement;
-    if (!container) return;
+  // Get DOM elements at script scope
+  const container = document.querySelector('.chart-container') as HTMLElement;
+  const canvas = document.getElementById('profile-chart') as HTMLCanvasElement;
+  const loading = container?.querySelector('.chart-loading') as HTMLElement;
+  const errorEl = container?.querySelector('.chart-error') as HTMLElement;
 
-    const canvas = document.getElementById('profile-chart') as HTMLCanvasElement;
-    const loading = container.querySelector('.chart-loading') as HTMLElement;
-    const error = container.querySelector('.chart-error') as HTMLElement;
+  async function loadProfileChart() {
+    if (!container || !canvas || !loading || !errorEl) return;
+
     const profilePath = container.dataset.profilePath;
 
     if (!profilePath) {
@@ -69,7 +71,7 @@ const profilePath = `/gm-profile-database/profiles/${profileName}/${variantFile}
       // Show loading state
       loading.hidden = false;
       canvas.hidden = true;
-      error.hidden = true;
+      errorEl.hidden = true;
 
       // Destroy existing chart if any
       if (chartInstance) {
@@ -104,16 +106,23 @@ const profilePath = `/gm-profile-database/profiles/${profileName}/${variantFile}
       }
 
     } catch (err) {
-      console.error('Chart loading error:', err);
+      const errorMsg = err instanceof Error ? err.message : String(err);
+      console.error('Chart loading error:', errorMsg);
       
-      // Show error state
-      loading.hidden = true;
-      canvas.hidden = true;
-      error.hidden = false;
+      // Only show error UI for "no phases"
+      const showUserError = errorMsg.includes('no phases');
       
-      const errorMessage = error.querySelector('p');
-      if (errorMessage && err instanceof Error) {
-        errorMessage.textContent = err.message;
+      if (showUserError) {
+        loading.hidden = true;
+        canvas.hidden = true;
+        errorEl.hidden = false;
+        const errorMessageEl = errorEl.querySelector('p');
+        if (errorMessageEl) errorMessageEl.textContent = 'Chart data unavailable';
+      } else {
+        // For other errors, hide loading but leave canvas visible
+        loading.hidden = true;
+        canvas.hidden = false;
+        errorEl.hidden = true;
       }
     }
   }
@@ -145,5 +154,12 @@ const profilePath = `/gm-profile-database/profiles/${profileName}/${variantFile}
 
   .chart-container canvas {
     max-height: 400px;
+  }
+
+  /* DaisyUI's .alert sets display:flex which overrides the [hidden] attribute.
+     Force hidden to work regardless of component class specificity. */
+  .chart-loading[hidden],
+  .chart-error[hidden] {
+    display: none !important;
   }
 </style>
