@@ -3,6 +3,7 @@
  * ProfileChart Component
  * Renders an interactive Chart.js visualization of profile data
  */
+import '@/styles/components/profile-chart.css';
 
 interface Props {
   profileName: string;
@@ -145,21 +146,3 @@ const profilePath = `/gm-profile-database/profiles/${profileName}/${variantFile}
   }
 </script>
 
-<style>
-  .chart-container {
-    position: relative;
-    width: 100%;
-    min-height: 400px;
-  }
-
-  .chart-container canvas {
-    max-height: 400px;
-  }
-
-  /* DaisyUI's .alert sets display:flex which overrides the [hidden] attribute.
-     Force hidden to work regardless of component class specificity. */
-  .chart-loading[hidden],
-  .chart-error[hidden] {
-    display: none !important;
-  }
-</style>

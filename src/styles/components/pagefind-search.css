@@ -1,0 +1,17 @@
+.pagefind-search-container {
+  position: relative;
+}
+
+#pagefind-search-input::-webkit-search-decoration,
+#pagefind-search-input::-webkit-search-cancel-button,
+#pagefind-search-input::-webkit-search-results-button,
+#pagefind-search-input::-webkit-search-results-decoration {
+  display: none;
+}
+
+#pagefind-search-clear {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}

@@ -3,6 +3,7 @@
  * ProfileCard Component
  * Displays a profile in card format on the homepage
  */
+import '@/styles/components/profile-card.css';
 
 interface Props {
   profile: {
@@ -97,11 +98,3 @@ const formattedDate = new Date(profile.date).toLocaleDateString('en-US', {
   </a>
 </article>
 
-<style>
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>

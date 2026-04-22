@@ -3,6 +3,7 @@
  * FilterChip Component
  * Displays an active filter as a removable chip
  */
+import '@/styles/components/filter-chip.css';
 
 interface Props {
   label: string;
@@ -43,21 +44,3 @@ const badgeClass = typeColors[type] || 'badge-neutral';
   </button>
 </div>
 
-<style>
-  .filter-chip {
-    transition: all 0.2s ease;
-  }
-  
-  .filter-chip:hover {
-    border-color: hsl(var(--p) / 0.5);
-  }
-  
-  .filter-chip-remove {
-    opacity: 0.6;
-    transition: all 0.2s ease;
-  }
-  
-  .filter-chip:hover .filter-chip-remove {
-    opacity: 1;
-  }
-</style>

@@ -1,0 +1,16 @@
+.filter-chip {
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover {
+  border-color: hsl(var(--p) / 0.5);
+}
+
+.filter-chip-remove {
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover .filter-chip-remove {
+  opacity: 1;
+}

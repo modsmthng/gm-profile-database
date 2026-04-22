@@ -4,6 +4,7 @@
  * Enhanced search input with Pagefind integration support
  * Falls back to client-side text search when Pagefind is not initialized
  */
+import '@/styles/components/search-bar.css';
 
 interface Props {
   placeholder?: string;
@@ -117,22 +118,3 @@ const {
   })();
 </script>
 
-<style>
-  .search-container {
-    position: relative;
-  }
-  
-  #search-input::-webkit-search-decoration,
-  #search-input::-webkit-search-cancel-button,
-  #search-input::-webkit-search-results-button,
-  #search-input::-webkit-search-results-decoration {
-    display: none;
-  }
-  
-  #search-clear {
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
-  }
-</style>

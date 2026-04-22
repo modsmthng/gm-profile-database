@@ -1,0 +1,7 @@
+.tab {
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  opacity: 0.8;
+}

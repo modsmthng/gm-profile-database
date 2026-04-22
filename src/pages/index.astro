@@ -9,6 +9,7 @@ import PagefindSearch from '@/components/search/PagefindSearch.astro';
 import FilterControls from '@/components/search/FilterControls.astro';
 import { readdir, readFile } from 'fs/promises';
 import { join } from 'path';
+import '@/styles/components/home.css';
 
 // Load all profiles
 async function loadProfiles() {
@@ -701,37 +702,4 @@ const profilesJson = JSON.stringify(allProfiles);
     })();
   </script>
 
-  <style>
-    .profile-grid {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 1.5rem;
-    }
-
-    @media (min-width: 640px) {
-      .profile-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .profile-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (min-width: 1280px) {
-      .profile-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    .search-highlight {
-      background-color: hsl(var(--p) / 0.2);
-      color: hsl(var(--pc));
-      border-radius: 2px;
-      padding: 0 2px;
-      font-weight: 600;
-    }
-  </style>
 </Base>

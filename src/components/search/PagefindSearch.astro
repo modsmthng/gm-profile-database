@@ -6,6 +6,7 @@
  * Approach: Pagefind searches HTML content → returns matching profiles
  * → existing filter system further refines by tags/difficulty
  */
+import '@/styles/components/pagefind-search.css';
 
 interface Props {
   placeholder?: string;
@@ -176,22 +177,3 @@ const { placeholder = "Search profiles..." } = Astro.props;
   })();
 </script>
 
-<style>
-  .pagefind-search-container {
-    position: relative;
-  }
-  
-  #pagefind-search-input::-webkit-search-decoration,
-  #pagefind-search-input::-webkit-search-cancel-button,
-  #pagefind-search-input::-webkit-search-results-button,
-  #pagefind-search-input::-webkit-search-results-decoration {
-    display: none;
-  }
-  
-  #pagefind-search-clear {
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
-  }
-</style>

@@ -25,21 +25,6 @@
     @apply focus:top-0 transition-all;
   }
   
-  /* Profile grid */
-  .profile-grid {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
-  }
-  
-  /* Chart container */
-  .chart-container {
-    @apply relative w-full;
-    min-height: 400px;
-  }
-  
-  .chart-container canvas {
-    max-height: 400px;
-  }
-  
   /* Loading skeleton */
   .skeleton {
     @apply bg-gradient-to-r from-base-200 via-base-300 to-base-200;

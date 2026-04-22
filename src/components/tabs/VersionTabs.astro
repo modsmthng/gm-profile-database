@@ -3,6 +3,7 @@
  * VersionTabs Component
  * Displays tabs for switching between profile versions
  */
+import '@/styles/components/version-tabs.css';
 
 interface Props {
   versions: Array<{
@@ -54,12 +55,3 @@ const activeVersion = defaultVersion || versions[0]?.id;
   </div>
 </div>
 
-<style>
-  .tab {
-    transition: all 0.2s;
-  }
-  
-  .tab:hover {
-    opacity: 0.8;
-  }
-</style>
