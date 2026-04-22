@@ -13,7 +13,7 @@ import { join } from 'path';
  */
 export async function loadAllProfiles() {
   try {
-    const profilesPath = join(process.cwd(), 'profiles');
+    const profilesPath = join(process.cwd(), 'public', 'profiles');
     const entries = await readdir(profilesPath, { withFileTypes: true });
     
     const profiles = [];
@@ -52,7 +52,7 @@ export async function loadAllProfiles() {
  */
 export async function loadProfile(name) {
   try {
-    const indexPath = join(process.cwd(), 'profiles', name, 'index.json');
+    const indexPath = join(process.cwd(), 'public', 'profiles', name, 'index.json');
     const indexData = await import(indexPath, { assert: { type: 'json' } });
     
     return {

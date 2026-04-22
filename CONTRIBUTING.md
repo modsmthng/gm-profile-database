@@ -3,7 +3,7 @@
 ## Quick Start
 
 1. Fork this repository
-2. Create your profile folder in `profiles/{your-profile}/`
+2. Create your profile folder in `public/profiles/{your-profile}/`
 3. Add `index.json` with your profile metadata
 4. Add your profile JSON file(s)
 5. Submit a Pull Request
@@ -11,7 +11,7 @@
 ## Profile Structure
 
 ```
-profiles/
+public/profiles/
 └── {profile-name}/
     ├── index.json          # Required - profile catalog
     ├── {profile}.json    # Your profile data

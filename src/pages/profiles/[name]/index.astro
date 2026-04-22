@@ -14,7 +14,7 @@ import { join } from 'path';
 // Generate static paths for all profiles
 export async function getStaticPaths() {
   try {
-    const profilesPath = join(process.cwd(), 'profiles');
+    const profilesPath = join(process.cwd(), 'public', 'profiles');
     const entries = await readdir(profilesPath, { withFileTypes: true });
     
     const paths = [];

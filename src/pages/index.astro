@@ -13,7 +13,7 @@ import { join } from 'path';
 // Load all profiles
 async function loadProfiles() {
   try {
-    const profilesPath = join(process.cwd(), 'profiles');
+    const profilesPath = join(process.cwd(), 'public', 'profiles');
     const entries = await readdir(profilesPath, { withFileTypes: true });
     
     const profiles = [];

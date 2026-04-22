@@ -41,7 +41,7 @@ async function validate() {
     const validateIndex = ajv.compile(indexSchema);
 
     // Find all index.json files
-    const indexFiles = await glob('profiles/*/index.json', { cwd: join(__dirname, '..') });
+    const indexFiles = await glob('public/profiles/*/index.json', { cwd: join(__dirname, '..') });
 
     if (indexFiles.length === 0) {
       console.log(`${colors.yellow}⚠️  No profiles found in profiles/ directory${colors.reset}\n`);
