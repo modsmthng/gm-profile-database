@@ -81,7 +81,7 @@
             "type": "object",
             "required": ["id", "file", "label"],
             "properties": {
-              "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+              "id": { "type": "string", "pattern": "^[\\x20-\\x21\\x23-\\x5B\\x5D-\\x7E]+$" },
               "file": { "type": "string", "pattern": "\\.json$" },
               "label": { "type": "string" },
               "downloadPath": { "type": "string" },

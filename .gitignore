@@ -31,3 +31,9 @@ test-results/
 
 # Validation
 validation-report.json
+
+# OpenCode Agent
+AGENTS.md
+
+# Claude Code
+.claude/settings.local.json

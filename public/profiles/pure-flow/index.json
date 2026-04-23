@@ -1,13 +1,14 @@
 {
   "name": "pure-flow",
-  "downloadPath": "/profiles/pure-flow/",
+  "downloadPath": "/public/profiles/pure-flow/",
   "displayName": "Pure Flow",
   "description": "Consistent flow throughout, with only maximum pressure and two small stop parameters controlling the phases. Works with and without scales.",
   "author": "modsmthng",
   "date": "2025-12-20",
   "link": "https://discord.com/channels/951416527721230336/1451876259624910899",
   "tags": ["lever", "advanced", "light-roast", "medium-roast", "dark-roast", "direct-lever", "flow-profiling"],
-  "difficulty": "advanced",
+  "complexity": "mid",
+  "picture": "/public/profiles/pure-flow/images/pure-flow-color.png",
   "variants": [
         {
           "id": "pure-flow-(5-10g)",
