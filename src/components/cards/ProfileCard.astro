@@ -45,16 +45,16 @@ const formattedDate = new Date(profile.date).toLocaleDateString('en-US', {
   <a href={`/gm-profile-database/profiles/${profile.slug}/`} class="block">
     <!-- Profile Image -->
     {profile.picture ? (
-      <figure class="aspect-video bg-base-200">
+      <figure class="aspect-square bg-base-200">
         <img
           src={profile.picture}
           alt={profile.displayName}
-          class="w-full h-full object-contain"
+          class="w-full h-full object-cover"
           loading="lazy"
         />
       </figure>
     ) : (
-      <figure class="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shimmer">
+      <figure class="aspect-square bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shimmer">
         <div class="text-4xl font-bold text-base-content/30">
           {profile.displayName.substring(0, 2).toUpperCase()}
         </div>
