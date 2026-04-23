@@ -248,7 +248,7 @@ const profilesJson = JSON.stringify(allProfiles);
         
         // If Pagefind results are available, filter to those profiles first
         if (state.pagefindResults && state.pagefindResults.length > 0) {
-          results = results.filter(p => state.pagefindResults.includes(p.name));
+          results = results.filter(p => state.pagefindResults.includes(p.slug));
         } else if (state.search && !state.pagefindResults) {
           // Fallback: client-side text search when Pagefind is not available
           const query = state.search.toLowerCase();
