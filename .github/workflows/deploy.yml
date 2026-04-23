@@ -39,11 +39,8 @@ jobs:
       - name: Validate profiles
         run: npm run validate
 
-      - name: Build site
-        run: npm run build
-
-      - name: Generate search index
-        run: npx pagefind --source dist
+      - name: Build site with search index
+        run: npm run build:full
 
       - name: Upload artifact
         if: github.ref == 'refs/heads/main'

@@ -60,33 +60,25 @@ const { placeholder = "Search profiles..." } = Astro.props;
     const searchClear = document.getElementById('pagefind-search-clear');
     const searchStatus = document.getElementById('pagefind-search-status');
     const searchStatusText = document.getElementById('pagefind-search-status-text');
-    
+
     if (!searchInput) return;
-    
+
     let pagefindInstance = null;
     let debounceTimer;
-    
+
     // Initialize Pagefind
     async function initPagefind() {
-      // Try multiple paths to handle both GitHub Pages and local development
-      const paths = [
-        '/gm-profile-database/_pagefind/pagefind.js',
-        '/_pagefind/pagefind.js'
-      ];
-      
-      for (const path of paths) {
-        try {
-          const pagefindModule = await import(path);
-          pagefindInstance = pagefindModule;
-          console.log('Pagefind initialized successfully from', path);
-          return;
-        } catch (err) {
-          console.warn('Failed to load Pagefind from', path, ':', err.message);
-        }
+      try {
+        // Get the correct base path from the current location
+        const baseUrl = new URL('./_pagefind/pagefind.js', window.location).href;
+        const pagefindModule = await import(baseUrl);
+        pagefindInstance = pagefindModule;
+        console.log('Pagefind initialized successfully');
+        return;
+      } catch (err) {
+        console.warn('Pagefind not available, using fallback search:', err.message);
+        pagefindInstance = null;
       }
-      
-      console.warn('Pagefind not available, using fallback search');
-      pagefindInstance = null;
     }
     
     // Show/hide clear button
