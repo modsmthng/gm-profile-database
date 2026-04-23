@@ -52,7 +52,7 @@ const allMachines = [...new Set(allProfiles.flatMap(p => p.machineCompatibility 
 // Get initial values from URL
 const initialSearch = Astro.url.searchParams.get('q') || '';
 const initialTags = Astro.url.searchParams.get('tags')?.split(',').filter(Boolean) || [];
-const initialDifficulty = Astro.url.searchParams.get('difficulty') || 'all';
+const initialComplexity = Astro.url.searchParams.get('complexity') || 'all';
 const initialMachine = Astro.url.searchParams.get('machine') || 'all';
 const initialSort = Astro.url.searchParams.get('sort') || 'newest';
 
@@ -65,22 +65,22 @@ const profilesJson = JSON.stringify(allProfiles);
   description="Browse and download community-created espresso brewing profiles for Gaggimate. Find the perfect pressure and flow profile for your setup."
 >
   <!-- Hero Section -->
-  <div class="hero bg-base-200 rounded-lg mb-8">
-    <div class="hero-content text-center py-12">
+  <div class="hero bg-base-200 rounded-lg mb-4">
+    <div class="hero-content text-center py-5">
       <div class="max-w-3xl">
-        <h1 class="text-4xl font-bold mb-4">Gaggimate Profile Store</h1>
-        <p class="text-lg mb-6">
+        <h1 class="text-4xl font-bold mb-2">Gaggimate Profile Store</h1>
+        <p class="text-lg mb-4">
           Discover and download espresso brewing profiles created by the community.
           Pressure profiling, flow profiling, and everything in between.
         </p>
         <div class="stats shadow">
           <div class="stat">
             <div class="stat-title">Total Profiles</div>
-            <div class="stat-value text-primary">{allProfiles.length}</div>
+            <div class="stat-value text-primary" id="stat-profiles" data-count={allProfiles.length}>0</div>
           </div>
           <div class="stat">
             <div class="stat-title">Categories</div>
-            <div class="stat-value text-secondary">{allTags.length}</div>
+            <div class="stat-value text-secondary" id="stat-tags" data-count={allTags.length}>0</div>
           </div>
         </div>
       </div>
@@ -88,19 +88,19 @@ const profilesJson = JSON.stringify(allProfiles);
   </div>
 
   <!-- Search Section -->
-  <div class="mb-4">
-    <PagefindSearch 
+  <div class="mb-3">
+    <PagefindSearch
       placeholder="Search profiles by name, description, tags, author..."
       initialValue={initialSearch}
     />
   </div>
 
   <!-- Filter Controls -->
-  <div class="mb-6">
-    <FilterControls 
+  <div class="mb-4">
+    <FilterControls
       allTags={allTags}
       allMachines={allMachines}
-      initialDifficulty={initialDifficulty}
+      initialComplexity={initialComplexity}
       initialTags={initialTags}
       initialMachine={initialMachine}
       initialSort={initialSort}
@@ -108,14 +108,14 @@ const profilesJson = JSON.stringify(allProfiles);
   </div>
 
   <!-- Results Count -->
-  <div id="results-count" class="text-sm text-base-content/60 mb-4">
+  <div id="results-count" class="text-sm text-base-content/60 mb-3">
     Loading profiles...
   </div>
 
   <!-- Profile Grid -->
   <div class="profile-grid mb-8" id="profile-grid">
-    {allProfiles.map(profile => (
-      <ProfileCard profile={profile} />
+    {allProfiles.map((profile, index) => (
+      <ProfileCard profile={profile} index={index} />
     ))}
   </div>
 
@@ -123,7 +123,7 @@ const profilesJson = JSON.stringify(allProfiles);
   <div id="pagination-container"></div>
 
   <!-- Empty State (hidden by default) -->
-  <div id="empty-state" class="text-center py-16 hidden">
+  <div id="empty-state" class="text-center py-16 hidden" style="animation: cardEnter 250ms ease-out forwards;">
     <div class="text-6xl mb-4">🔍</div>
     <h2 class="text-2xl font-bold mb-2">No Profiles Found</h2>
     <p class="text-base-content/60 mb-6 max-w-md mx-auto">
@@ -151,7 +151,7 @@ const profilesJson = JSON.stringify(allProfiles);
       const state = {
         search: '',
         tags: [],
-        difficulty: 'all',
+        complexity: 'all',
         machine: 'all',
         sort: 'newest',
         page: 1,
@@ -167,7 +167,7 @@ const profilesJson = JSON.stringify(allProfiles);
       
       // Filter control refs
       const tagCheckboxes = document.querySelectorAll('.tag-checkbox');
-      const difficultyBtns = document.querySelectorAll('.difficulty-btn');
+      const complexityBtns = document.querySelectorAll('.complexity-btn');
       const machineSelect = document.getElementById('machine-filter');
       const sortSelect = document.getElementById('sort-select');
       const tagCount = document.getElementById('tag-count');
@@ -183,7 +183,7 @@ const profilesJson = JSON.stringify(allProfiles);
         
         if (params.has('q')) state.search = params.get('q');
         if (params.has('tags')) state.tags = params.get('tags').split(',').filter(Boolean);
-        if (params.has('difficulty')) state.difficulty = params.get('difficulty');
+        if (params.has('complexity')) state.complexity = params.get('complexity');
         if (params.has('machine')) state.machine = params.get('machine');
         if (params.has('sort')) state.sort = params.get('sort');
         if (params.has('page')) state.page = parseInt(params.get('page')) || 1;
@@ -200,8 +200,8 @@ const profilesJson = JSON.stringify(allProfiles);
         });
         updateTagCount();
         
-        difficultyBtns.forEach(btn => {
-          const isActive = btn.dataset.difficulty === state.difficulty;
+        complexityBtns.forEach(btn => {
+          const isActive = btn.dataset.complexity === state.complexity;
           btn.classList.toggle('btn-active', isActive);
           btn.setAttribute('aria-pressed', isActive);
         });
@@ -224,7 +224,7 @@ const profilesJson = JSON.stringify(allProfiles);
       function clearAllFilters() {
         state.search = '';
         state.tags = [];
-        state.difficulty = 'all';
+        state.complexity = 'all';
         state.machine = 'all';
         state.sort = 'newest';
         state.page = 1;
@@ -259,8 +259,8 @@ const profilesJson = JSON.stringify(allProfiles);
           );
         }
         
-        if (state.difficulty !== 'all') {
-          results = results.filter(p => p.difficulty === state.difficulty);
+        if (state.complexity !== 'all') {
+          results = results.filter(p => p.complexity === state.complexity);
         }
         
         if (state.machine !== 'all') {
@@ -284,9 +284,9 @@ const profilesJson = JSON.stringify(allProfiles);
           case 'alpha':
             return sorted.sort((a, b) => (a.displayName || a.name).localeCompare(b.displayName || b.name));
           
-          case 'difficulty': {
-            const order = { beginner: 0, intermediate: 1, advanced: 2 };
-            return sorted.sort((a, b) => (order[a.difficulty] || 0) - (order[b.difficulty] || 0));
+          case 'complexity': {
+            const order = { low: 0, mid: 1, high: 2 };
+            return sorted.sort((a, b) => (order[a.complexity] || 0) - (order[b.complexity] || 0));
           }
           
           default:
@@ -306,16 +306,21 @@ const profilesJson = JSON.stringify(allProfiles);
         const start = (state.page - 1) * PROFILES_PER_PAGE;
         const end = Math.min(start + PROFILES_PER_PAGE, totalResults);
         const paginatedResults = results.slice(start, end);
-        
-        // Update results count
+
+        // Update results count with fade animation
         if (resultsCount) {
-          if (totalResults === 0) {
-            resultsCount.textContent = 'No profiles match your filters';
-          } else if (totalResults === totalProfiles) {
-            resultsCount.textContent = `Showing ${start + 1}-${end} of ${totalResults} profiles`;
-          } else {
-            resultsCount.textContent = `Showing ${start + 1}-${end} of ${totalResults} profiles (filtered from ${totalProfiles})`;
-          }
+          resultsCount.style.opacity = '0.4';
+          setTimeout(() => {
+            if (totalResults === 0) {
+              resultsCount.textContent = 'No profiles match your filters';
+            } else if (totalResults === totalProfiles) {
+              resultsCount.textContent = `Showing ${start + 1}-${end} of ${totalResults} profiles`;
+            } else {
+              resultsCount.textContent = `Showing ${start + 1}-${end} of ${totalResults} profiles (filtered from ${totalProfiles})`;
+            }
+            resultsCount.style.transition = 'opacity 150ms ease-out';
+            resultsCount.style.opacity = '1';
+          }, 75);
         }
         
         // Show/hide profile cards
@@ -423,8 +428,8 @@ const profilesJson = JSON.stringify(allProfiles);
           chips.push({ type: 'tag', label: tag, value: tag });
         });
         
-        if (state.difficulty !== 'all') {
-          chips.push({ type: 'difficulty', label: state.difficulty, value: state.difficulty });
+        if (state.complexity !== 'all') {
+          chips.push({ type: 'complexity', label: state.complexity, value: state.complexity });
         }
         
         if (state.machine !== 'all') {
@@ -434,17 +439,19 @@ const profilesJson = JSON.stringify(allProfiles);
         chips.forEach(chip => {
           const chipEl = document.createElement('div');
           chipEl.className = 'inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-base-200 border border-base-300 filter-chip';
-          
+          chipEl.style.animation = 'cardEnter 150ms ease-out';
+          chipEl.style.transformOrigin = 'center';
+
           const colorClass = {
             search: 'text-primary',
             tag: 'text-secondary',
-            difficulty: 'text-accent',
+            complexity: 'text-accent',
             machine: 'text-info'
           }[chip.type];
-          
+
           chipEl.innerHTML = `
             <span class="${colorClass}">${chip.label}</span>
-            <button 
+            <button
               type="button"
               class="filter-chip-remove ml-1 p-0.5 rounded-full hover:bg-error hover:text-error-content transition-colors"
               aria-label="Remove filter"
@@ -454,10 +461,16 @@ const profilesJson = JSON.stringify(allProfiles);
               </svg>
             </button>
           `;
-          
+
           const removeBtn = chipEl.querySelector('.filter-chip-remove');
-          removeBtn.addEventListener('click', () => removeFilter(chip.type, chip.value));
-          
+          removeBtn.addEventListener('click', () => {
+            chipEl.style.animation = 'none';
+            chipEl.style.transform = 'scale(0.85)';
+            chipEl.style.opacity = '0';
+            chipEl.style.transition = 'all 120ms ease-out';
+            setTimeout(() => removeFilter(chip.type, chip.value), 120);
+          });
+
           filterChips.appendChild(chipEl);
         });
         
@@ -479,8 +492,8 @@ const profilesJson = JSON.stringify(allProfiles);
           case 'tag':
             state.tags = state.tags.filter(t => t !== value);
             break;
-          case 'difficulty':
-            state.difficulty = 'all';
+          case 'complexity':
+            state.complexity = 'all';
             break;
           case 'machine':
             state.machine = 'all';
@@ -493,7 +506,7 @@ const profilesJson = JSON.stringify(allProfiles);
       
       function applyStateToUI() {
         const tagCheckboxes = document.querySelectorAll('.tag-checkbox');
-        const difficultyBtns = document.querySelectorAll('.difficulty-btn');
+        const complexityBtns = document.querySelectorAll('.complexity-btn');
         const machineSelect = document.getElementById('machine-filter');
         const sortSelect = document.getElementById('sort-select');
         
@@ -502,8 +515,8 @@ const profilesJson = JSON.stringify(allProfiles);
         });
         updateTagCount();
         
-        difficultyBtns.forEach(btn => {
-          const isActive = btn.dataset.difficulty === state.difficulty;
+        complexityBtns.forEach(btn => {
+          const isActive = btn.dataset.complexity === state.complexity;
           btn.classList.toggle('btn-active', isActive);
           btn.setAttribute('aria-pressed', isActive);
         });
@@ -530,7 +543,7 @@ const profilesJson = JSON.stringify(allProfiles);
         
         if (state.search) params.set('q', state.search);
         if (state.tags.length > 0) params.set('tags', state.tags.join(','));
-        if (state.difficulty !== 'all') params.set('difficulty', state.difficulty);
+        if (state.complexity !== 'all') params.set('complexity', state.complexity);
         if (state.machine !== 'all') params.set('machine', state.machine);
         if (state.sort !== 'newest') params.set('sort', state.sort);
         if (state.page > 1) params.set('page', state.page.toString());
@@ -627,20 +640,24 @@ const profilesJson = JSON.stringify(allProfiles);
           applyFilters();
         });
         
-        // Difficulty buttons
-        difficultyBtns.forEach(btn => {
+        // Complexity buttons
+        complexityBtns.forEach(btn => {
           btn.addEventListener('click', () => {
-            const difficulty = btn.dataset.difficulty;
-            state.difficulty = difficulty;
+            const complexity = btn.dataset.complexity;
+            state.complexity = complexity;
             state.page = 1;
-            
-            difficultyBtns.forEach(b => {
+
+            complexityBtns.forEach(b => {
               b.classList.remove('btn-active');
               b.setAttribute('aria-pressed', 'false');
             });
             btn.classList.add('btn-active');
+            btn.classList.add('active');
             btn.setAttribute('aria-pressed', 'true');
-            
+
+            // Remove pulse class after animation completes
+            setTimeout(() => btn.classList.remove('active'), 200);
+
             applyFilters();
           });
         });
@@ -683,11 +700,43 @@ const profilesJson = JSON.stringify(allProfiles);
         });
       }
       
+      // ===== COUNTER ANIMATION =====
+      function animateCounter(element, target) {
+        const duration = 400;
+        const startTime = Date.now();
+        const start = 0;
+
+        const updateCounter = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const current = Math.floor(start + (target - start) * progress);
+          element.textContent = current;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          }
+        };
+
+        updateCounter();
+      }
+
       // ===== INIT =====
       function init() {
         initFromUrl();
         bindEvents();
         applyFilters();
+
+        // Animate stats counters on load
+        const statsProfiles = document.getElementById('stat-profiles');
+        const statsTags = document.getElementById('stat-tags');
+
+        if (statsProfiles && statsProfiles.dataset.count) {
+          setTimeout(() => animateCounter(statsProfiles, parseInt(statsProfiles.dataset.count)), 200);
+        }
+
+        if (statsTags && statsTags.dataset.count) {
+          setTimeout(() => animateCounter(statsTags, parseInt(statsTags.dataset.count)), 200);
+        }
       }
       
       // Start when DOM is ready

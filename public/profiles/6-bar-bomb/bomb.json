@@ -1,0 +1,56 @@
+{
+  "label": "6 Bar Bomb",
+  "type": "pro",
+  "description": "Hits 6 bar then goes to 2.0 g/s. For light roasts ",
+  "temperature": 88,
+  "phases": [
+    {
+      "name": "Pump It Up!",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 15,
+      "temperature": 0,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 7,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "pressure",
+          "operator": "gte",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "Decline",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 25,
+      "temperature": 78,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 2
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 47
+        }
+      ]
+    }
+  ]
+}

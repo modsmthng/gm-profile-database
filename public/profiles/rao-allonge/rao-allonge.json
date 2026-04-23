@@ -1,0 +1,62 @@
+{
+  "label": "Rao Allongé",
+  "type": "pro",
+  "description": "Light/Fruity - Coarse - 20-40s - 1:2-5",
+  "temperature": 92,
+  "utility": false,
+  "phases": [
+    {
+      "name": "hold at 4.5 ml/s",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 2,
+      "temperature": 92,
+      "transition": {
+        "type": "ease-out",
+        "duration": 0,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 8.6,
+        "flow": 4.5
+      },
+      "targets": [
+        {
+          "type": "pumped",
+          "operator": "gte",
+          "value": 500
+        }
+      ]
+    },
+    {
+      "name": "hold at 4.5 ml/s",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 60,
+      "temperature": 92,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 8.6,
+        "flow": 4.5
+      },
+      "targets": [
+        {
+          "type": "pumped",
+          "operator": "gte",
+          "value": 500
+        },
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 45
+        }
+      ]
+    }
+  ]
+}

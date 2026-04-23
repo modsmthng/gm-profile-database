@@ -1,0 +1,33 @@
+{
+  "name": "funkytown",
+  "displayName": "Funkytown",
+  "description": "Heavily processed coffees with two variants: Adaptive for full control, Simple for consistent results",
+  "author": "Unknown",
+  "date": "2026-04-23",
+  "tags": ["processed", "pro"],
+  "complexity": "mid",
+  "variants": [
+    {
+      "id": "funkytown-adaptive",
+      "file": "adaptive.json",
+      "label": "Funkytown Adaptive",
+      "type": "pro",
+      "brewRatio": "1:2-2.5",
+      "tempRange": "78°C",
+      "timeRange": "45-50s",
+      "grindSize": "fine",
+      "notes": "For heavily processed coffees - Co-Ferments, Double Anaerobic, etc. with adaptive control"
+    },
+    {
+      "id": "funkytown-simple",
+      "file": "simple.json",
+      "label": "Funkytown Simple",
+      "type": "standard",
+      "brewRatio": "1:2-2.5",
+      "tempRange": "78°C",
+      "timeRange": "40-50s",
+      "grindSize": "fine",
+      "notes": "For heavily processed coffees - Co-Ferments, Double Anaerobic, etc. with standard control"
+    }
+  ]
+}

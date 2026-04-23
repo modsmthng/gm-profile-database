@@ -21,7 +21,7 @@
   "date": "2026-01-15",
   "link": "https://discord.com/channels/123456/789012",
   "tags": ["espresso", "classic"],
-  "difficulty": "beginner"
+  "complexity": "low"
 }
 ```
 
@@ -71,7 +71,7 @@
   "date": "2026-02-01",
   "link": "https://discord.com/channels/123456/789013",
   "tags": ["espresso", "versatile"],
-  "difficulty": "intermediate",
+  "complexity": "mid",
   "variants": [
     {
       "id": "vst-18g",
@@ -186,7 +186,7 @@
   "link": "https://discord.com/channels/123456/789014",
   "tags": ["pressure", "advanced", "profiling"],
   "machineCompatibility": ["gaggia-classic", "gaggia-pro"],
-  "difficulty": "advanced",
+  "complexity": "high",
   "versions": [
     {
       "id": "v01",
@@ -334,7 +334,7 @@
   "link": "https://discord.com/channels/123456/789015",
   "tags": ["lever", "pro", "classic"],
   "machineCompatibility": ["cremina", "gaggia-lever"],
-  "difficulty": "advanced",
+  "complexity": "high",
   "variants": [
     {
       "id": "cremina",
@@ -479,10 +479,10 @@
 {
   "name": "invalid-profile",
   "downloadPath": "/profiles/invalid-profile/",
-  "difficulty": "super-hard"
-  // "difficulty" should be: beginner, intermediate, or advanced
+  "complexity": "super-high"
+  // "complexity" should be: low, mid, or high
 }
 ```
 
 **Errors:**
-- Invalid value for `difficulty`: "super-hard" is not a valid option
+- Invalid value for `complexity`: "super-high" is not a valid option

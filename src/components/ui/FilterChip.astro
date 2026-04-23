@@ -8,7 +8,7 @@ import '@/styles/components/filter-chip.css';
 interface Props {
   label: string;
   value: string;
-  type: 'search' | 'tag' | 'difficulty' | 'machine' | 'sort';
+  type: 'search' | 'tag' | 'complexity' | 'machine' | 'sort';
   onRemove?: string; // JavaScript expression to execute on remove
 }
 
@@ -18,7 +18,7 @@ const { label, value, type, onRemove } = Astro.props;
 const typeColors = {
   search: 'badge-primary',
   tag: 'badge-secondary',
-  difficulty: 'badge-accent',
+  complexity: 'badge-accent',
   machine: 'badge-info',
   sort: 'badge-ghost'
 };

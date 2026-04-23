@@ -1,0 +1,81 @@
+{
+  "label": "Turbo",
+  "type": "pro",
+  "description": "Turbo shot (fast, high pressure). Target ~1:2 yield (e.g., 18g -> 36g). Designed for coarse grind + quick 6 bar brew.",
+  "temperature": 93,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Quick Wet",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 3,
+      "temperature": 0,
+      "transition": {
+        "type": "ease-out",
+        "duration": 1,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 2,
+        "flow": 8
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Short Bloom",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 0,
+      "transition": {
+        "type": "linear",
+        "duration": 1,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 2,
+        "flow": 2.5
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Turbo Brew",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 25,
+      "temperature": 0,
+      "transition": {
+        "type": "ease-in",
+        "duration": 2,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 6,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 36
+        }
+      ]
+    }
+  ]
+}

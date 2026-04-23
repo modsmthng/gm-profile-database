@@ -1,0 +1,81 @@
+{
+  "label": "Soup Pro Beta",
+  "type": "pro",
+  "description": "Ratio 1:3, Temp ?, Pressure less than 1 bar. ",
+  "temperature": 86,
+  "utility": false,
+  "phases": [
+    {
+      "name": "Headspace",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 2,
+      "temperature": 0,
+      "transition": {
+        "type": "ease-out",
+        "duration": 1,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 1,
+        "flow": 8
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 0.5
+        }
+      ]
+    },
+    {
+      "name": "Soak",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 2,
+      "temperature": 0,
+      "transition": {
+        "type": "ease-in",
+        "duration": 1,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 1,
+        "flow": 2.5
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "YeeYee",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 25,
+      "temperature": 0,
+      "transition": {
+        "type": "linear",
+        "duration": 3,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 8
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 47
+        }
+      ]
+    }
+  ]
+}
