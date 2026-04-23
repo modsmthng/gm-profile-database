@@ -39,7 +39,7 @@
     },
     "picture": {
       "type": "string",
-      "description": "Path to profile image (optional)"
+      "description": "Path to profile image. Use relative paths (e.g., 'image.jpg') to reference files in your profile directory. Absolute paths starting with '/' are also supported."
     },
     "link": {
       "type": "string",

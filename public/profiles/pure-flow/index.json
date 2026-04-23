@@ -8,7 +8,7 @@
   "link": "https://discord.com/channels/951416527721230336/1451876259624910899",
   "tags": ["lever", "advanced", "light-roast", "medium-roast", "dark-roast", "direct-lever", "flow-profiling"],
   "complexity": "mid",
-  "picture": "/public/profiles/pure-flow/images/pure-flow-color.png",
+  "picture": "images/pure-flow-color.png",
   "variants": [
         {
           "id": "pure-flow-(5-10g)",

@@ -35,7 +35,27 @@ public/profiles/
   "description": "What your profile does...",
   "author": "YourName",
   "link": "https://discord.com/...",
-  "complexity": "low"
+  "complexity": "low",
+  "picture": "profile.jpg"
+}
+```
+
+### Picture Field
+
+The `picture` field accepts **relative paths** pointing to image files in your profile directory:
+
+```json
+{
+  "picture": "profile.jpg"        // References {profile-name}/profile.jpg
+}
+```
+
+This resolves to the full URL: `/gm-profile-database/profiles/{profile-name}/profile.jpg`
+
+You can also use absolute paths if needed:
+```json
+{
+  "picture": "/gm-profile-database/profiles/my-profile/image.jpg"
 }
 ```
 
