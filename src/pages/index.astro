@@ -5,7 +5,7 @@
  */
 import Base from '@/layouts/Base.astro';
 import ProfileCard from '@/components/cards/ProfileCard.astro';
-import PagefindSearch from '@/components/search/PagefindSearch.astro';
+import SearchBar from '@/components/search/SearchBar.astro';
 import FilterControls from '@/components/search/FilterControls.astro';
 import { readdir, readFile } from 'fs/promises';
 import { join } from 'path';
@@ -94,7 +94,7 @@ const profilesJson = JSON.stringify(allProfiles);
 
   <!-- Search Section -->
   <div class="mb-3">
-    <PagefindSearch
+    <SearchBar
       placeholder="Search profiles by name, description, tags, author..."
       initialValue={initialSearch}
     />
@@ -159,8 +159,7 @@ const profilesJson = JSON.stringify(allProfiles);
         complexity: 'all',
         machine: 'all',
         sort: 'newest',
-        page: 1,
-        pagefindResults: null // Array of profile names from Pagefind, or null for no search
+        page: 1
       };
       
       // ===== DOM REFS =====
@@ -233,11 +232,10 @@ const profilesJson = JSON.stringify(allProfiles);
         state.machine = 'all';
         state.sort = 'newest';
         state.page = 1;
-        state.pagefindResults = null;
-        
+
         if (searchInput) searchInput.value = '';
         if (searchClear) searchClear.classList.add('hidden');
-        
+
         applyStateToUI();
         applyFilters();
       }
@@ -245,12 +243,9 @@ const profilesJson = JSON.stringify(allProfiles);
       // ===== FILTER LOGIC =====
       function filterProfiles() {
         let results = [...allProfiles];
-        
-        // If Pagefind results are available, filter to those profiles first
-        if (state.pagefindResults && state.pagefindResults.length > 0) {
-          results = results.filter(p => state.pagefindResults.includes(p.slug));
-        } else if (state.search && !state.pagefindResults) {
-          // Fallback: client-side text search when Pagefind is not available
+
+        // Client-side text search
+        if (state.search) {
           const query = state.search.toLowerCase();
           results = results.filter(p => {
             const text = `${p.displayName || ''} ${p.name || ''} ${p.description || ''} ${p.author || ''} ${(p.tags || []).join(' ')}`.toLowerCase();
@@ -302,7 +297,6 @@ const profilesJson = JSON.stringify(allProfiles);
       // ===== UI UPDATE =====
       function applyFilters() {
         const results = filterProfiles();
-        console.log('applyFilters called, filtered results:', results.length, 'profiles');
         updateUI(results);
       }
       
@@ -331,12 +325,10 @@ const profilesJson = JSON.stringify(allProfiles);
         
         // Show/hide profile cards
         const allCards = document.querySelectorAll('.profile-grid article');
-        console.log('Total cards in grid:', allCards.length);
         allCards.forEach(card => card.style.display = 'none');
 
         paginatedResults.forEach(profile => {
           const card = document.querySelector(`article[data-profile-slug="${profile.slug}"]`);
-          console.log(`Looking for card with slug "${profile.slug}":`, card ? 'found' : 'NOT FOUND');
           if (card) card.style.display = '';
         });
         
@@ -691,21 +683,11 @@ const profilesJson = JSON.stringify(allProfiles);
         if (clearAllBtn) clearAllBtn.addEventListener('click', clearAllFilters);
         if (emptyClearAll) emptyClearAll.addEventListener('click', clearAllFilters);
         
-        // Listen for search changes (from SearchBar or Pagefind)
+        // Listen for search changes
         document.addEventListener('search-change', (e) => {
           const detail = e.detail || {};
           state.search = detail.query || '';
           state.page = 1;
-
-          console.log('search-change event received:', { query: state.search, pagefindResults: detail.pagefindResults });
-
-          // Handle Pagefind results if available
-          if (detail.pagefindResults) {
-            state.pagefindResults = detail.pagefindResults;
-          } else {
-            state.pagefindResults = null;
-          }
-
           applyFilters();
         });
       }
