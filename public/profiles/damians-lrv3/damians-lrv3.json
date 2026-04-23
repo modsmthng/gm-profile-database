@@ -1,0 +1,245 @@
+{
+  "label": "Damian's LRv3",
+  "type": "pro",
+  "description": "Medium to Dark - Fine - ~20-45s - 1:2–2.5 | Simulates a Londinium R Machine",
+  "temperature": 90,
+  "phases": [
+    {
+      "name": "Fill start",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 2,
+      "temperature": 90,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 2,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "pumped",
+          "operator": "gte",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "name": "Fill",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 25,
+      "temperature": 90,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 2,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "pumped",
+          "operator": "gte",
+          "value": 100
+        },
+        {
+          "type": "pressure",
+          "operator": "gte",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "name": "Infuse",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 89.5,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 3,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "pumped",
+          "operator": "gte",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "name": "Pressure Up",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 89,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 9,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "pumped",
+          "operator": "gte",
+          "value": 100
+        },
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 42
+        }
+      ]
+    },
+    {
+      "name": "9 Bar Hold",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 30,
+      "temperature": 89,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 9,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "pumped",
+          "operator": "gte",
+          "value": 100
+        },
+        {
+          "type": "flow",
+          "operator": "gte",
+          "value": 1.9
+        },
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 42
+        }
+      ]
+    },
+    {
+      "name": "Pressure Decline",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 35,
+      "temperature": 89,
+      "transition": {
+        "type": "linear",
+        "duration": 35,
+        "adaptive": true
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 5.5,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "pumped",
+          "operator": "gte",
+          "value": 100
+        },
+        {
+          "type": "flow",
+          "operator": "gte",
+          "value": 2.8
+        },
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 42
+        }
+      ]
+    },
+    {
+      "name": "5 Bar Hold ",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 30,
+      "temperature": 89,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 5.5,
+        "flow": 0
+      },
+      "targets": [
+        {
+          "type": "pumped",
+          "operator": "gte",
+          "value": 100
+        },
+        {
+          "type": "flow",
+          "operator": "gte",
+          "value": 2.8
+        },
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 42
+        }
+      ]
+    },
+    {
+      "name": "Flow Limit",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 60,
+      "temperature": 89,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 2.2
+      },
+      "targets": [
+        {
+          "type": "pumped",
+          "operator": "gte",
+          "value": 100
+        },
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 42
+        }
+      ]
+    }
+  ]
+}

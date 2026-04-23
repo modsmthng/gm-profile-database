@@ -35,7 +35,7 @@ The homepage includes advanced search and filtering capabilities to help users f
 
 | Filter | Type | Options |
 |--------|------|--------|
-| Difficulty | Single select | All, Beginner, Intermediate, Advanced |
+| Complexity | Single select | All, Low, Mid, High |
 | Tags | Multi select | All tags from profiles |
 | Machine | Single select | All, then individual machines |
 | Sort | Single select | Newest, A-Z, Difficulty |
@@ -51,9 +51,9 @@ The homepage includes advanced search and filtering capabilities to help users f
 interface FilterState {
   search: string;      // Empty = no text filter
   tags: string[];      // Empty = no tag filter
-  difficulty: string;  // "all" = no difficulty filter
+  complexity: string;  // "all" = no complexity filter
   machine: string;     // "all" = no machine filter
-  sort: 'newest' | 'alpha' | 'difficulty';
+  sort: 'newest' | 'alpha' | 'complexity';
   page: number;        // Current pagination page
 }
 ```
@@ -63,7 +63,7 @@ interface FilterState {
 | Component | Description |
 |-----------|-------------|
 | Search input | Text field with search icon, powered by Pagefind |
-| Difficulty pills | Horizontal button group |
+| Complexity pills | Horizontal button group |
 | Tag dropdown | Multi-select dropdown with checkboxes |
 | Machine dropdown | Single-select dropdown |
 | Sort dropdown | Single-select dropdown |

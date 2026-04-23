@@ -5,7 +5,7 @@
   "author": "Gaggimate",
   "date": "2026-04-22",
   "tags": ["espresso", "classic", "beginner"],
-  "difficulty": "beginner",
+  "complexity": "low",
   "variants": [
     {
       "id": "standard",

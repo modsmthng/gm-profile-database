@@ -1,0 +1,22 @@
+{
+  "name": "soup-lance-mods",
+  "displayName": "Soup Lance Mods",
+  "description": "Low pressure espresso profile (less than 1 bar) optimized for high ratio extractions",
+  "author": "Unknown",
+  "date": "2026-04-23",
+  "tags": ["low-pressure", "high-ratio", "pro"],
+  "complexity": "mid",
+  "variants": [
+    {
+      "id": "soup-lance-mods",
+      "file": "soup-lance-mods.json",
+      "label": "Soup Pro Beta",
+      "type": "pro",
+      "brewRatio": "1:3",
+      "tempRange": "86°C",
+      "timeRange": "25-30s",
+      "grindSize": "medium",
+      "notes": "Low pressure (less than 1 bar) with headspace and soak phases"
+    }
+  ]
+}

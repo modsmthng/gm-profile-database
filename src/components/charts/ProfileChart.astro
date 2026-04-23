@@ -100,6 +100,12 @@ const profilePath = `/gm-profile-database/profiles/${profileName}/${variantFile}
       loading.hidden = true;
       canvas.hidden = false;
 
+      // Add animation to canvas
+      canvas.style.opacity = '0';
+      canvas.style.animation = 'none';
+      canvas.offsetHeight; // Force reflow
+      canvas.style.animation = 'cardEnter 250ms ease-out forwards';
+
       // Create chart
       const ctx = canvas.getContext('2d');
       if (ctx) {

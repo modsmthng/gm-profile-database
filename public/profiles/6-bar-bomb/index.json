@@ -1,0 +1,22 @@
+{
+  "name": "6-bar-bomb",
+  "displayName": "6 Bar Bomb",
+  "description": "High pressure followed by consistent flow rate. Optimized for light roasts",
+  "author": "Unknown",
+  "date": "2026-04-23",
+  "tags": ["light-roast", "pro"],
+  "complexity": "mid",
+  "variants": [
+    {
+      "id": "6-bar-bomb",
+      "file": "bomb.json",
+      "label": "6 Bar Bomb",
+      "type": "pro",
+      "brewRatio": "1:2",
+      "tempRange": "88°C",
+      "timeRange": "40s",
+      "grindSize": "fine",
+      "notes": "Hits 6 bar then goes to 2.0 g/s. For light roasts"
+    }
+  ]
+}

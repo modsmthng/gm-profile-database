@@ -1,0 +1,23 @@
+{
+  "name": "adaptive-v2",
+  "displayName": "Adaptive v2",
+  "description": "Comprehensive adaptive profile with multiple phases for light to medium roasts",
+  "author": "Unknown",
+  "date": "2026-04-23",
+  "tags": ["light-roast", "medium-roast", "adaptive", "pro"],
+  "complexity": "high",
+  "link": "https://discord.com/channels/951416527721230336/1399807685179736215",
+  "variants": [
+    {
+      "id": "adaptive-v2",
+      "file": "adaptive-v2.json",
+      "label": "Adaptive v2",
+      "type": "pro",
+      "brewRatio": "1:2-2.5",
+      "tempRange": "88-93°C",
+      "timeRange": "25-40s",
+      "grindSize": "fine",
+      "notes": "Light to Medium - with prefill, fill, compressing, and dripping phases"
+    }
+  ]
+}

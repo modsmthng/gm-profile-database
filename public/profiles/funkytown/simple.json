@@ -1,0 +1,66 @@
+{
+  "label": "Funky Town 78C 47gr",
+  "type": "standard",
+  "description": "Heavily processed coffees - 2-2:5 - Co-Ferments, Double Anaerobic, etc.",
+  "temperature": 78,
+  "phases": [
+    {
+      "name": "Hit It",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 5,
+      "temperature": 0,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 3.5,
+        "flow": 12
+      }
+    },
+    {
+      "name": "Bloom/Drip",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 0,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 1.5,
+        "flow": 0.1
+      }
+    },
+    {
+      "name": "Brew - 6 Bar Max",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 40,
+      "temperature": 0,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "pressure",
+        "pressure": 6,
+        "flow": 3
+      },
+      "targets": [
+        {
+          "type": "volumetric",
+          "operator": "gte",
+          "value": 47
+        }
+      ]
+    }
+  ]
+}

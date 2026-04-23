@@ -105,19 +105,19 @@ export function getAllTags(profiles) {
 }
 
 /**
- * Gets all unique difficulty levels from profiles
- * 
+ * Gets all unique complexity levels from profiles
+ *
  * @param {Array} profiles - Array of profile objects
- * @returns {Array} Array of difficulty levels
+ * @returns {Array} Array of complexity levels
  */
-export function getAllDifficulties(profiles) {
-  const difficulties = new Set();
-  
+export function getAllComplexities(profiles) {
+  const complexities = new Set();
+
   profiles.forEach(profile => {
-    if (profile.difficulty) {
-      difficulties.add(profile.difficulty);
+    if (profile.complexity) {
+      complexities.add(profile.complexity);
     }
   });
-  
-  return Array.from(difficulties);
+
+  return Array.from(complexities);
 }

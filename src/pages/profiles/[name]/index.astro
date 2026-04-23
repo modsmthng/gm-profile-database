@@ -10,6 +10,7 @@ import Badge from '@/components/ui/Badge.astro';
 import { resolveDownloadPath, getFilename } from '@/utils/download';
 import { readdir, readFile } from 'fs/promises';
 import { join } from 'path';
+import '@/styles/components/profile-detail.css';
 
 // Generate static paths for all profiles
 export async function getStaticPaths() {
@@ -89,12 +90,12 @@ const formattedDate = new Date(profile.date).toLocaleDateString('en-US', {
   day: 'numeric',
 });
 
-// Difficulty badge variant
-const difficultyVariant = {
-  beginner: 'success',
-  intermediate: 'warning',
-  advanced: 'error',
-}[profile.difficulty] || 'default';
+// Complexity badge variant
+const complexityVariant = {
+  low: 'success',
+  mid: 'warning',
+  high: 'error',
+}[profile.complexity] || 'default';
 ---
 
 <Base 
@@ -110,7 +111,7 @@ const difficultyVariant = {
   </div>
 
   <!-- Profile Header -->
-  <div class="card bg-base-100 shadow-lg mb-4" data-pagefind-body>
+  <div class="card bg-base-100 shadow-lg mb-4 profile-header" data-pagefind-body>
     <div class="card-body">
       <div class="flex flex-col md:flex-row justify-between items-start gap-4">
         <div class="flex-1">
@@ -119,14 +120,17 @@ const difficultyVariant = {
           
           <!-- Metadata -->
           <div class="flex flex-wrap gap-3 items-center">
-            <Badge variant={difficultyVariant as any} size="md" data-pagefind-filter="difficulty">
-              {profile.difficulty}
-            </Badge>
-            
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-semibold text-base-content/70">Profile Complexity:</span>
+              <Badge variant={complexityVariant as any} size="md" data-pagefind-filter="complexity">
+                {profile.complexity}
+              </Badge>
+            </div>
+
             <div class="text-sm text-base-content/60">
               by <span class="font-semibold" data-pagefind-filter="author">{profile.author}</span>
             </div>
-            
+
             <div class="text-sm text-base-content/60">
               {formattedDate}
             </div>
@@ -174,7 +178,7 @@ const difficultyVariant = {
 
   <!-- Selection Card (Pattern B & C) -->
   {(isPatternB || isPatternC) && (
-    <div class="card bg-base-100 shadow-sm mb-4">
+    <div class="card bg-base-100 shadow-sm mb-4 profile-selection">
       <div class="card-body py-4">
         <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-end">
           <!-- Version dropdown (Pattern C only) -->
@@ -221,7 +225,7 @@ const difficultyVariant = {
           </div>
 
           <!-- Download Button -->
-          <a 
+          <a
             id="download-button"
             href={downloadPath}
             download
@@ -233,6 +237,17 @@ const difficultyVariant = {
             </svg>
             Download
           </a>
+
+          {profile.link && (
+            <a
+              href={profile.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline btn-sm gap-2"
+            >
+              💬 Discuss
+            </a>
+          )}
         </div>
 
         <!-- Variant details inline -->
@@ -279,7 +294,7 @@ const difficultyVariant = {
   )}
 
   <!-- Chart -->
-  <div class="card bg-base-100 shadow-sm mb-4">
+  <div class="card bg-base-100 shadow-sm mb-4 profile-chart">
     <div class="card-body">
       <h2 class="card-title mb-4">Profile Visualization</h2>
       <div id="chart-wrapper">
@@ -293,7 +308,7 @@ const difficultyVariant = {
 
   <!-- Machine Compatibility -->
   {profile.machineCompatibility && profile.machineCompatibility.length > 0 && (
-    <div class="card bg-base-100 shadow-sm mb-4">
+    <div class="card bg-base-100 shadow-sm mb-4 profile-compatibility">
       <div class="card-body">
         <h2 class="card-title mb-4">Compatible Machines</h2>
         <div class="flex flex-wrap gap-2">
@@ -306,7 +321,7 @@ const difficultyVariant = {
   )}
 
   <!-- Back to profiles -->
-  <div class="text-center mt-8">
+  <div class="text-center mt-8 profile-back">
     <a href="/gm-profile-database/" class="btn btn-ghost">
       ← Back to All Profiles
     </a>
@@ -351,48 +366,58 @@ const difficultyVariant = {
     function updateVariantDetails(variant) {
       const detailsContainer = document.getElementById('variant-details');
       if (!detailsContainer || !variant) return;
-      
-      let html = '<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">';
-      
-      if (variant.doseRange) {
-        html += `<div class="bg-base-200 rounded px-2 py-1">
-          <div class="text-xs opacity-60">Dose</div>
-          <div class="font-medium">${variant.doseRange}</div>
-        </div>`;
-      }
-      
-      if (variant.brewRatio) {
-        html += `<div class="bg-base-200 rounded px-2 py-1">
-          <div class="text-xs opacity-60">Ratio</div>
-          <div class="font-medium">${variant.brewRatio}</div>
-        </div>`;
-      }
-      
-      if (variant.tempRange) {
-        html += `<div class="bg-base-200 rounded px-2 py-1">
-          <div class="text-xs opacity-60">Temp</div>
-          <div class="font-medium">${variant.tempRange}</div>
-        </div>`;
-      }
-      
-      if (variant.timeRange) {
-        html += `<div class="bg-base-200 rounded px-2 py-1">
-          <div class="text-xs opacity-60">Time</div>
-          <div class="font-medium">${variant.timeRange}</div>
-        </div>`;
-      }
-      
-      html += '</div>';
-      
-      if (variant.grindSize) {
-        html += `<div class="mt-2 text-sm"><span class="font-medium">Grind:</span> ${variant.grindSize}</div>`;
-      }
-      
-      if (variant.notes) {
-        html += `<div class="mt-2 text-sm opacity-70">${variant.notes}</div>`;
-      }
-      
-      detailsContainer.innerHTML = html;
+
+      // Trigger fade out animation
+      detailsContainer.classList.add('variant-updating');
+      detailsContainer.classList.remove('variant-entering');
+
+      setTimeout(() => {
+        let html = '<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">';
+
+        if (variant.doseRange) {
+          html += `<div class="bg-base-200 rounded px-2 py-1">
+            <div class="text-xs opacity-60">Dose</div>
+            <div class="font-medium">${variant.doseRange}</div>
+          </div>`;
+        }
+
+        if (variant.brewRatio) {
+          html += `<div class="bg-base-200 rounded px-2 py-1">
+            <div class="text-xs opacity-60">Ratio</div>
+            <div class="font-medium">${variant.brewRatio}</div>
+          </div>`;
+        }
+
+        if (variant.tempRange) {
+          html += `<div class="bg-base-200 rounded px-2 py-1">
+            <div class="text-xs opacity-60">Temp</div>
+            <div class="font-medium">${variant.tempRange}</div>
+          </div>`;
+        }
+
+        if (variant.timeRange) {
+          html += `<div class="bg-base-200 rounded px-2 py-1">
+            <div class="text-xs opacity-60">Time</div>
+            <div class="font-medium">${variant.timeRange}</div>
+          </div>`;
+        }
+
+        html += '</div>';
+
+        if (variant.grindSize) {
+          html += `<div class="mt-2 text-sm"><span class="font-medium">Grind:</span> ${variant.grindSize}</div>`;
+        }
+
+        if (variant.notes) {
+          html += `<div class="mt-2 text-sm opacity-70">${variant.notes}</div>`;
+        }
+
+        detailsContainer.innerHTML = html;
+
+        // Trigger fade in animation
+        detailsContainer.classList.remove('variant-updating');
+        detailsContainer.classList.add('variant-entering');
+      }, 50);
     }
     
     /**

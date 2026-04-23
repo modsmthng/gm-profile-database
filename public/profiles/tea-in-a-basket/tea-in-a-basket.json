@@ -1,0 +1,253 @@
+{
+  "label": "Tea in a basket",
+  "type": "pro",
+  "description": "This profile makes an acceptable mug of tea using a regular portafilter espresso basket. Place half a teaspoon of loose leaf tea, or a teabag, into a basket of any size. Works best of teas that prefer high brewing temperatures, such as English Breakfast. For better quality brews, use a tea portafilter, but this technique works well enough if you don't own that.",
+  "temperature": 100,
+  "utility": false,
+  "phases": [
+    {
+      "name": "preinfusion boost",
+      "phase": "preinfusion",
+      "valve": 1,
+      "duration": 4,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 4
+      }
+    },
+    {
+      "name": "flow",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 5,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 0.5
+      }
+    },
+    {
+      "name": "hold",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 10,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": 0
+    },
+    {
+      "name": "flow",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 3
+      }
+    },
+    {
+      "name": "hold",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": 0
+    },
+    {
+      "name": "flow",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 3
+      }
+    },
+    {
+      "name": "hold",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": 0
+    },
+    {
+      "name": "flow",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 3
+      }
+    },
+    {
+      "name": "hold",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": 0
+    },
+    {
+      "name": "flow",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 3
+      }
+    },
+    {
+      "name": "hold",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": 0
+    },
+    {
+      "name": "flow",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 12,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 3
+      }
+    },
+    {
+      "name": "hold",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 10,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": 0
+    },
+    {
+      "name": "flow",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 10,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 3
+      }
+    },
+    {
+      "name": "flow",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 10,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": 0
+    },
+    {
+      "name": "flow",
+      "phase": "brew",
+      "valve": 1,
+      "duration": 10,
+      "temperature": 100,
+      "transition": {
+        "type": "instant",
+        "duration": 0,
+        "adaptive": false
+      },
+      "pump": {
+        "target": "flow",
+        "pressure": 0,
+        "flow": 3
+      }
+    }
+  ]
+}

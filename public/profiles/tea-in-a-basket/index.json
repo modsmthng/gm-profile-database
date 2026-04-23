@@ -1,0 +1,22 @@
+{
+  "name": "tea-in-a-basket",
+  "displayName": "Tea in a Basket",
+  "description": "Specialized profile for brewing tea using a regular portafilter espresso basket",
+  "author": "Unknown",
+  "date": "2026-04-23",
+  "tags": ["tea", "utility", "pro"],
+  "complexity": "low",
+  "variants": [
+    {
+      "id": "tea-in-a-basket",
+      "file": "tea-in-a-basket.json",
+      "label": "Tea in a Basket",
+      "type": "pro",
+      "brewRatio": "1:20-30",
+      "tempRange": "100°C",
+      "timeRange": "60-80s",
+      "grindSize": "n/a",
+      "notes": "For brewing loose leaf tea or teabags in regular portafilter baskets"
+    }
+  ]
+}

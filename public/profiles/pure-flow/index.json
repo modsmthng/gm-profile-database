@@ -1,0 +1,22 @@
+{
+  "name": "pure-flow",
+  "displayName": "Pure Flow",
+  "description": "Direct Lever - Balanced flow profile for all bean types and grind sizes with consistent flow throughout",
+  "author": "Unknown",
+  "date": "2026-04-23",
+  "tags": ["balanced", "flow", "pro"],
+  "complexity": "mid",
+  "variants": [
+    {
+      "id": "pure-flow",
+      "file": "pure-flow.json",
+      "label": "Pure Flow (Direct Lever)",
+      "type": "pro",
+      "brewRatio": "1:2-3",
+      "tempRange": "94°C",
+      "timeRange": "45s",
+      "grindSize": "medium",
+      "notes": "Balanced flow profile with only maximum pressure and two small stop parameters"
+    }
+  ]
+}

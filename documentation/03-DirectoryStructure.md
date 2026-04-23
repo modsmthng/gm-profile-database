@@ -146,7 +146,7 @@ profiles/9bar-espresso/
   "description": "A classic 9 bar extraction profile",
   "author": "Gaggimate",
   "date": "2026-04-22",
-  "difficulty": "beginner",
+  "complexity": "low",
   "tags": ["espresso", "classic"]
 }
 ```
@@ -173,7 +173,7 @@ profiles/9bar-espresso/
   "description": "A classic 9 bar extraction profile",
   "author": "Gaggimate",
   "date": "2026-04-22",
-  "difficulty": "beginner",
+  "complexity": "low",
   "tags": ["espresso", "classic"],
   "variants": [
     {
@@ -223,7 +223,7 @@ profiles/lever-classic/
   "displayName": "Lever Classic",
   "description": "Profile for lever-operated machines",
   "author": "Gaggimate",
-  "difficulty": "advanced",
+  "complexity": "high",
   "tags": ["lever", "classic"],
   "versions": [
     {

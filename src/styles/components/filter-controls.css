@@ -2,12 +2,16 @@
   position: relative;
 }
 
-.difficulty-btn {
+.complexity-btn {
   transition: all 0.2s ease;
 }
 
-.difficulty-btn:hover {
+.complexity-btn:hover {
   transform: translateY(-1px);
+}
+
+.complexity-btn.active {
+  animation: pulse 200ms ease-out;
 }
 
 /* Dropdown scroll styling */

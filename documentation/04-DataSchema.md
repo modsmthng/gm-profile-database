@@ -43,19 +43,19 @@ These fields are available for all profile patterns:
 | `description` | string | Yes | Profile description (supports markdown) |
 | `author` | string | Yes | Creator name |
 | `date` | string | Yes | Creation date (ISO 8601: YYYY-MM-DD) |
-| `difficulty` | string | Yes | beginner, intermediate, or advanced |
+| `complexity` | string | Yes | low, mid, or high |
 | `tags` | array[string] | Yes | Category tags (e.g., ["espresso", "classic"]) |
 | `picture` | string | No | Path to profile image |
 | `link` | string | No | Discord/discussion URL |
 | `machineCompatibility` | array[string] | No | Compatible machines |
 
-#### Difficulty Values
+#### Complexity Values
 
 | Value | Meaning |
 |-------|---------|
-| `beginner` | Easy to use, forgiving parameters |
-| `intermediate` | Requires some experience |
-| `advanced` | For experienced users |
+| `low` | Easy to use, forgiving parameters |
+| `mid` | Requires some experience |
+| `high` | For experienced users |
 
 ### 3.5 Download Path Resolution
 
@@ -194,7 +194,7 @@ index.json
   "description": "A classic 9 bar extraction profile for espresso",
   "author": "Gaggimate",
   "date": "2026-04-22",
-  "difficulty": "beginner",
+  "complexity": "low",
   "tags": ["espresso", "classic"]
 }
 ```
@@ -231,7 +231,7 @@ index.json
   "description": "A classic 9 bar extraction profile for espresso",
   "author": "Gaggimate",
   "date": "2026-04-22",
-  "difficulty": "beginner",
+  "complexity": "low",
   "tags": ["espresso", "classic"],
   "variants": [
     {
@@ -294,7 +294,7 @@ index.json
   "description": "Profile for lever-operated machines",
   "author": "Gaggimate",
   "date": "2026-04-22",
-  "difficulty": "advanced",
+  "complexity": "high",
   "tags": ["lever", "classic"],
   "versions": [
     {
@@ -424,7 +424,7 @@ Complete JSON schema for validating `index.json` files. Save this as `src/schema
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Profile Index",
   "type": "object",
-  "required": ["name", "displayName", "description", "author", "date", "difficulty", "tags"],
+  "required": ["name", "displayName", "description", "author", "date", "complexity", "tags"],
   "properties": {
     "name": {
       "type": "string",
@@ -449,9 +449,9 @@ Complete JSON schema for validating `index.json` files. Save this as `src/schema
       "format": "date",
       "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
     },
-    "difficulty": {
+    "complexity": {
       "type": "string",
-      "enum": ["beginner", "intermediate", "advanced"]
+      "enum": ["low", "mid", "high"]
     },
     "tags": {
       "type": "array",

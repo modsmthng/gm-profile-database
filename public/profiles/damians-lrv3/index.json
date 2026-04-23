@@ -1,0 +1,22 @@
+{
+  "name": "damians-lrv3",
+  "displayName": "Damian's LRv3",
+  "description": "Londinium R Machine simulation with pressure ramp and decline phases",
+  "author": "Damian",
+  "date": "2026-04-23",
+  "tags": ["londinium", "pro"],
+  "complexity": "mid",
+  "variants": [
+    {
+      "id": "damians-lrv3",
+      "file": "damians-lrv3.json",
+      "label": "Damian's LRv3",
+      "type": "pro",
+      "brewRatio": "1:2-2.5",
+      "tempRange": "89-90°C",
+      "timeRange": "20-45s",
+      "grindSize": "fine",
+      "notes": "Simulates a Londinium R Machine with multiple pressure phases"
+    }
+  ]
+}

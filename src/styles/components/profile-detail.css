@@ -1,0 +1,96 @@
+/* Profile Detail Page Animations */
+
+/* Content stagger animation */
+.profile-header,
+.profile-selection,
+.profile-chart,
+.profile-compatibility,
+.profile-back {
+  animation: cardEnter 250ms ease-out forwards;
+}
+
+.profile-header { animation-delay: 0ms; }
+.profile-selection { animation-delay: 50ms; }
+.profile-chart { animation-delay: 100ms; }
+.profile-compatibility { animation-delay: 150ms; }
+.profile-back { animation-delay: 200ms; }
+
+/* Variant details fade animation */
+#variant-details {
+  animation: slideDown 200ms ease-out forwards;
+}
+
+/* Badge hover glow */
+.badge {
+  transition: all 200ms ease-out;
+}
+
+.badge:hover {
+  box-shadow: 0 0 8px color-mix(in oklch, var(--color-primary) 30%, transparent);
+  transform: translateY(-2px);
+}
+
+.badge[data-pagefind-filter="tag"]:hover,
+.badge[data-pagefind-filter="machine"]:hover {
+  box-shadow: 0 0 12px color-mix(in oklch, var(--color-secondary) 30%, transparent);
+}
+
+/* Download button pulse and glow */
+#download-button {
+  transition: all 200ms ease-out;
+  position: relative;
+}
+
+#download-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px color-mix(in oklch, var(--color-primary) 30%, transparent);
+}
+
+/* Initial load pulse for primary download button */
+.profile-header #download-button {
+  animation: glow 2s ease-out 1;
+}
+
+/* Dropdown focus shine */
+.select {
+  transition: all 200ms ease-out;
+}
+
+.select:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-primary) 10%, transparent);
+}
+
+.select:hover {
+  border-color: var(--color-primary);
+}
+
+/* Back button animation */
+.profile-back .btn-ghost {
+  transition: all 200ms ease-out;
+}
+
+.profile-back .btn-ghost:hover {
+  transform: translateY(-2px);
+  background-color: var(--color-primary);
+  color: var(--color-primary-content);
+}
+
+/* Variant details animation states */
+#variant-details.variant-updating {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: none;
+}
+
+#variant-details.variant-entering {
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Chart fade-in */
+#chart-wrapper {
+  animation: cardEnter 250ms ease-out forwards;
+  animation-delay: 100ms;
+}

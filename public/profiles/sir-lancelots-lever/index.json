@@ -1,0 +1,22 @@
+{
+  "name": "sir-lancelots-lever",
+  "displayName": "Sir Lancelot's Lever",
+  "description": "Lance Hedricks Lever Style Profile with aggressive pump phase and bloom",
+  "author": "Lance Hedricks",
+  "date": "2026-04-23",
+  "tags": ["lever", "pro"],
+  "complexity": "mid",
+  "variants": [
+    {
+      "id": "sir-lancelots-lever",
+      "file": "sir-lancelots-lever.json",
+      "label": "Sir Lancelot's Lever",
+      "type": "pro",
+      "brewRatio": "1:1.5-2.2",
+      "tempRange": "75-82°C",
+      "timeRange": "70s",
+      "grindSize": "very-fine",
+      "notes": "Aggressive pump phase to 10 bar followed by low flow bloom"
+    }
+  ]
+}

@@ -54,7 +54,7 @@ interface ProfileIndex {
   picture?: string;
   author?: string;
   date?: string;
-  difficulty?: 'beginner' | 'intermediate' | 'advanced';
+  complexity?: 'low' | 'mid' | 'high';
   tags?: string[];
   link?: string;
   downloadPath: string;
@@ -72,7 +72,7 @@ interface ProfileIndex {
 
 | State | Display |
 |-------|---------|
-| Default | Card with image, name, difficulty badge |
+| Default | Card with image, name, complexity badge |
 | Hover | Slight elevation, border highlight |
 | Error | Error banner on card |
 | Loading | Skeleton placeholder |
@@ -92,7 +92,7 @@ interface ProfileIndex {
 |  Profile Name                  |
 |  Author • Date                 |
 |                                |
-|  [Beginner] [Espresso]        |
+|  Profile Complexity: [Low] [Espresso]        |
 |                                |
 |  🔗 Discord Thread           |
 +--------------------------------+

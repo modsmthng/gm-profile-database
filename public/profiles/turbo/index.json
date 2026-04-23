@@ -1,0 +1,22 @@
+{
+  "name": "turbo",
+  "displayName": "Turbo",
+  "description": "Fast, high-pressure turbo shot optimized for coarse grind and quick extraction",
+  "author": "Unknown",
+  "date": "2026-04-23",
+  "tags": ["fast", "high-pressure", "pro"],
+  "complexity": "mid",
+  "variants": [
+    {
+      "id": "turbo",
+      "file": "turbo.json",
+      "label": "Turbo",
+      "type": "pro",
+      "brewRatio": "1:2",
+      "tempRange": "93°C",
+      "timeRange": "25-30s",
+      "grindSize": "coarse",
+      "notes": "Turbo shot (fast, high pressure) designed for coarse grind + quick 6 bar brew"
+    }
+  ]
+}

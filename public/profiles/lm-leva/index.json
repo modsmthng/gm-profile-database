@@ -1,12 +1,12 @@
 {
-  "name": "lm-leva",
-  "displayName": "LM Leva Style",
+  "name": "damians-lm-leva",
+  "displayName": "Damians LM Leva Style",
   "description": "Simulates the La Marzocco Leva extraction curve. Features a gentle fill phase, controlled preinfusion, pressure rise, hold, and decline. Ideal for light to medium roasts.",
   "author": "Gaggimate",
   "date": "2026-04-22",
   "link": "https://discord.gg/gaggimate",
   "tags": ["lever", "advanced", "light-roast"],
-  "difficulty": "advanced",
+  "complexity": "mid",
   "variants": [
     {
       "id": "standard",

@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Profile Index",
   "type": "object",
-  "required": ["name", "displayName", "description", "author", "date", "difficulty", "tags"],
+  "required": ["name", "displayName", "description", "author", "date", "complexity", "tags"],
   "properties": {
     "name": {
       "type": "string",
@@ -27,9 +27,9 @@
       "format": "date",
       "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
     },
-    "difficulty": {
+    "complexity": {
       "type": "string",
-      "enum": ["beginner", "intermediate", "advanced"]
+      "enum": ["low", "mid", "high"]
     },
     "tags": {
       "type": "array",

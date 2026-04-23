@@ -55,7 +55,7 @@ profiles/your-profile-name/
   "description": "A clear description of what this profile does. Include extraction method, ideal coffee roasts, and key parameters.",
   "author": "Your Name or Username",
   "date": "2026-04-22",
-  "difficulty": "beginner",
+  "complexity": "low",
   "tags": ["espresso", "classic"],
   "picture": "/assets/img/your-profile-name.jpg",
   "link": "https://discord.gg/gaggimate"
@@ -119,7 +119,7 @@ profiles/your-profile-name/
   "description": "A clear description. Include what makes each variant different.",
   "author": "Your Name or Username",
   "date": "2026-04-22",
-  "difficulty": "beginner",
+  "complexity": "low",
   "tags": ["espresso", "classic"],
   "picture": "/assets/img/your-profile-name.jpg",
   "link": "https://discord.gg/gaggimate",
@@ -239,7 +239,7 @@ profiles/your-profile-name/
   "description": "Long description of the profile and its evolution",
   "author": "Your Name or Username",
   "date": "2026-04-22",
-  "difficulty": "advanced",
+  "complexity": "high",
   "tags": ["espresso", "pressure-profiling"],
   "picture": "/assets/img/your-profile-name.jpg",
   "link": "https://discord.gg/gaggimate",
@@ -362,7 +362,7 @@ Create profile files in each version folder (e.g., `v1.0.0/18g.json`, `v2.0.0-be
 | `description` | string | `"A classic 9 bar extraction profile..."` |
 | `author` | string | `"John Doe"` |
 | `date` | string (YYYY-MM-DD) | `"2026-04-22"` |
-| `difficulty` | string | `"beginner"`, `"intermediate"`, `"advanced"` |
+| `complexity` | string | `"low"`, `"mid"`, `"high"` |
 | `tags` | array[string] | `["espresso", "classic"]` |
 
 ### Base Profile Fields (Optional for All Patterns)

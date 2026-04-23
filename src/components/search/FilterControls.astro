@@ -9,55 +9,56 @@ import '@/styles/components/filter-controls.css';
 interface Props {
   allTags: string[];
   allMachines: string[];
-  initialDifficulty?: string;
+  initialComplexity?: string;
   initialTags?: string[];
   initialMachine?: string;
   initialSort?: string;
 }
 
-const { 
+const {
   allTags = [],
   allMachines = [],
-  initialDifficulty = 'all',
+  initialComplexity = 'all',
   initialTags = [],
   initialMachine = 'all',
   initialSort = 'newest'
 } = Astro.props;
 
-// Difficulty options
-const difficulties = [
+// Complexity options
+const complexities = [
   { value: 'all', label: 'All' },
-  { value: 'beginner', label: 'Beginner', color: 'btn-success' },
-  { value: 'intermediate', label: 'Intermediate', color: 'btn-warning' },
-  { value: 'advanced', label: 'Advanced', color: 'btn-error' }
+  { value: 'low', label: 'Low', color: 'btn-success' },
+  { value: 'mid', label: 'Mid', color: 'btn-warning' },
+  { value: 'high', label: 'High', color: 'btn-error' }
 ];
 
 // Sort options
 const sortOptions = [
   { value: 'newest', label: 'Newest First' },
   { value: 'alpha', label: 'Name (A-Z)' },
-  { value: 'difficulty', label: 'Difficulty (Easy → Hard)' }
+  { value: 'complexity', label: 'Complexity (Low → High)' }
 ];
 ---
 
 <div class="filter-controls" id="filter-controls">
-  <!-- Filter Bar -->
-  <div class="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between mb-4">
-    <!-- Left: Difficulty Pills -->
-    <div class="flex gap-2 flex-wrap" id="difficulty-buttons">
-      {difficulties.map(diff => (
-        <button 
-          class={`btn btn-sm btn-outline difficulty-btn ${diff.color || ''} ${initialDifficulty === diff.value ? 'btn-active' : ''}`}
-          data-difficulty={diff.value}
-          aria-pressed={initialDifficulty === diff.value}
+  <!-- Filter Bar: single row, wraps on small screens -->
+  <div class="flex flex-wrap gap-3 items-center justify-between mb-3">
+    <!-- Profile Complexity Pills -->
+    <div class="flex gap-2 flex-wrap items-center" id="complexity-buttons">
+      <span class="text-sm font-semibold text-base-content/70">Profile Complexity</span>
+      {complexities.map(comp => (
+        <button
+          class={`btn btn-sm btn-outline complexity-btn ${comp.color || ''} ${initialComplexity === comp.value ? 'btn-active' : ''}`}
+          data-complexity={comp.value}
+          aria-pressed={initialComplexity === comp.value}
         >
-          {diff.label}
+          {comp.label}
         </button>
       ))}
     </div>
-    
-    <!-- Right: Tag, Machine, Sort -->
-    <div class="flex gap-3 flex-wrap items-center" id="filter-dropdowns">
+
+    <!-- Tag, Machine, Sort — same row -->
+    <div class="flex gap-3 items-center" id="filter-dropdowns">
       <!-- Tag Filter -->
       {allTags.length > 0 && (
         <div class="dropdown dropdown-hover">
@@ -68,13 +69,13 @@ const sortOptions = [
             Tags
             <span id="tag-count" class="badge badge-sm badge-primary hidden">0</span>
           </label>
-          <ul tabindex="0" class="dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-56 max-h-64 overflow-y-auto z-50">
+          <ul tabindex="0" class="dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-72 max-h-80 overflow-y-auto z-50 grid grid-cols-2 gap-x-2">
             {allTags.map(tag => (
               <li>
                 <label class="cursor-pointer flex items-center gap-2 px-2 py-1 hover:bg-base-200 rounded">
-                  <input 
-                    type="checkbox" 
-                    class="checkbox checkbox-sm tag-checkbox" 
+                  <input
+                    type="checkbox"
+                    class="checkbox checkbox-sm tag-checkbox"
                     value={tag}
                     checked={initialTags.includes(tag)}
                   />
@@ -82,7 +83,7 @@ const sortOptions = [
                 </label>
               </li>
             ))}
-            <li class="border-t border-base-300 mt-1 pt-1">
+            <li class="col-span-2 border-t border-base-300 mt-1 pt-1">
               <button type="button" class="clear-tags-btn text-sm text-primary hover:underline w-full text-left px-2 py-1">
                 Clear all tags
               </button>
@@ -90,11 +91,11 @@ const sortOptions = [
           </ul>
         </div>
       )}
-      
+
       <!-- Machine Filter -->
       {allMachines.length > 0 && (
-        <select 
-          id="machine-filter" 
+        <select
+          id="machine-filter"
           class="select select-sm select-bordered"
           aria-label="Filter by machine"
         >
@@ -104,10 +105,10 @@ const sortOptions = [
           ))}
         </select>
       )}
-      
+
       <!-- Sort -->
-      <select 
-        id="sort-select" 
+      <select
+        id="sort-select"
         class="select select-sm select-bordered"
         aria-label="Sort profiles"
       >
@@ -119,7 +120,7 @@ const sortOptions = [
   </div>
   
   <!-- Active Filter Chips -->
-  <div id="active-filters" class="flex flex-wrap gap-2 items-center min-h-[2rem]">
+  <div id="active-filters" class="flex flex-wrap gap-2 items-center min-h-[1.75rem]">
     <span id="active-filters-label" class="text-sm text-base-content/60 hidden">Active:</span>
     <div id="filter-chips" class="flex flex-wrap gap-2"></div>
     <button 

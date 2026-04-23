@@ -35,7 +35,7 @@ public/profiles/
   "description": "What your profile does...",
   "author": "YourName",
   "link": "https://discord.com/...",
-  "difficulty": "beginner"
+  "complexity": "low"
 }
 ```
 

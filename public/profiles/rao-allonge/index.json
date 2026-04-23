@@ -1,0 +1,22 @@
+{
+  "name": "rao-allonge",
+  "displayName": "Rao Allongé",
+  "description": "Light fruity espresso with consistent flow rate - optimized for coarse grinds and longer extractions",
+  "author": "Rao",
+  "date": "2026-04-23",
+  "tags": ["light-roast", "fruity", "flow", "pro"],
+  "complexity": "mid",
+  "variants": [
+    {
+      "id": "rao-allonge",
+      "file": "rao-allonge.json",
+      "label": "Rao Allongé",
+      "type": "pro",
+      "brewRatio": "1:2.5-5",
+      "tempRange": "92°C",
+      "timeRange": "20-40s",
+      "grindSize": "coarse",
+      "notes": "Light/Fruity - Coarse grind with consistent 4.5 ml/s flow"
+    }
+  ]
+}
