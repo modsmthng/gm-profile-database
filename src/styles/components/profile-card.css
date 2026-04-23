@@ -37,3 +37,25 @@
   opacity: 1;
   transform: scale(1.05);
 }
+
+/* Extended blur utilities */
+.blur-xl {
+  filter: blur(20px);
+}
+
+.blur-2xl {
+  filter: blur(30px);
+}
+
+.blur-3xl {
+  filter: blur(40px);
+}
+.blur-4xl {
+  filter: blur(50px);
+}
+.blur-5xl {
+  filter: blur(60px);
+}
+.blur-6xl {
+  filter: blur(70px);
+}

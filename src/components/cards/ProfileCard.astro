@@ -38,9 +38,10 @@ const formattedDate = new Date(profile.date).toLocaleDateString('en-US', {
 ---
 
 <article
-  class="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+  class="card shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden"
   data-profile-name={profile.name}
-  style={`animation: cardEnter 250ms ease-out forwards; animation-delay: ${index * 50}ms;`}
+  data-color-card={profile.picture ? 'true' : 'false'}
+  style={`animation: cardEnter 250ms ease-out forwards; animation-delay: ${index * 50}ms; background-color: var(--card-bg-color, var(--color-base-100));`}
 >
   <a href={`/gm-profile-database/profiles/${profile.slug}/`} class="block">
     <!-- Profile Image -->
@@ -50,6 +51,7 @@ const formattedDate = new Date(profile.date).toLocaleDateString('en-US', {
           src={profile.picture}
           alt={profile.displayName}
           class="w-full h-full object-cover"
+          data-extract-color="true"
           loading="lazy"
         />
       </figure>
@@ -109,3 +111,66 @@ const formattedDate = new Date(profile.date).toLocaleDateString('en-US', {
   </a>
 </article>
 
+<script>
+function extractAverageColor(imgElement, cardElement) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.src = imgElement.src;
+
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 10;
+    canvas.height = 10;
+    const ctx = canvas.getContext('2d');
+
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+
+    let r = 0, g = 0, b = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      r += data[i];
+      g += data[i + 1];
+      b += data[i + 2];
+    }
+
+    const pixelCount = data.length / 4;
+    r = Math.round(r / pixelCount);
+    g = Math.round(g / pixelCount);
+    b = Math.round(b / pixelCount);
+
+    // Calculate luminance and darken if too light
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+    let finalR = r;
+    let finalG = g;
+    let finalB = b;
+
+    if (luminance > 0.5) {
+      // Color is too light, darken it
+      const darknessFactor = 0.5;
+      finalR = Math.round(r * darknessFactor);
+      finalG = Math.round(g * darknessFactor);
+      finalB = Math.round(b * darknessFactor);
+    }
+
+    const color = `rgb(${finalR}, ${finalG}, ${finalB})`;
+    cardElement.style.setProperty('--card-bg-color', color);
+  };
+
+  img.onerror = () => console.error('Failed to load image for color extraction:', imgElement.src);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('[data-extract-color="true"]').forEach(img => {
+    const card = img.closest('article[data-color-card="true"]');
+    if (card) {
+      if (img.complete) {
+        extractAverageColor(img, card);
+      } else {
+        img.addEventListener('load', () => extractAverageColor(img, card));
+      }
+    }
+  });
+});
+</script>
