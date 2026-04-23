@@ -39,6 +39,7 @@ const formattedDate = new Date(profile.date).toLocaleDateString('en-US', {
 
 <article
   class="card shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+  data-profile-slug={profile.slug}
   data-profile-name={profile.name}
   data-color-card={profile.picture ? 'true' : 'false'}
   style={`animation: cardEnter 250ms ease-out forwards; animation-delay: ${index * 50}ms; background-color: var(--card-bg-color, var(--color-base-100));`}

@@ -331,9 +331,9 @@ const profilesJson = JSON.stringify(allProfiles);
         // Show/hide profile cards
         const allCards = document.querySelectorAll('.profile-grid article');
         allCards.forEach(card => card.style.display = 'none');
-        
+
         paginatedResults.forEach(profile => {
-          const card = document.querySelector(`article[data-profile-name="${profile.name}"]`);
+          const card = document.querySelector(`article[data-profile-slug="${profile.slug}"]`);
           if (card) card.style.display = '';
         });
         
