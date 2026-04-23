@@ -92,21 +92,24 @@ const { placeholder = "Search profiles..." } = Astro.props;
     
     // Perform Pagefind search
     async function performSearch(query) {
+      console.log('performSearch called with:', query, 'pagefindInstance available:', !!pagefindInstance);
       if (!query) {
         searchStatus.classList.add('hidden');
         // Dispatch empty search to show all profiles
+        console.log('Dispatching empty search event');
         document.dispatchEvent(new CustomEvent('search-change', {
           detail: { query: '', pagefindResults: null }
         }));
         return;
       }
-      
+
       searchStatus.classList.remove('hidden');
       searchStatusText.textContent = `Searching for "${query}"...`;
-      
+
       // If Pagefind is available, use it
       if (pagefindInstance) {
         try {
+          console.log('Searching with Pagefind...');
           const results = await pagefindInstance.search(query);
           
           // Extract profile names from URLs
@@ -118,23 +121,25 @@ const { placeholder = "Search profiles..." } = Astro.props;
           }).filter(Boolean);
           
           searchStatus.classList.add('hidden');
-          
+
+          console.log('Pagefind search succeeded, found', profileNames.length, 'profiles:', profileNames);
           // Dispatch event with Pagefind results
           document.dispatchEvent(new CustomEvent('search-change', {
-            detail: { 
+            detail: {
               query,
               pagefindResults: profileNames,
               totalResults: results.results.length
             }
           }));
-          
+
           return;
         } catch (err) {
           console.warn('Pagefind search failed, using fallback:', err);
         }
       }
-      
+
       // Fallback: dispatch regular search event
+      console.log('Using fallback search for query:', query);
       searchStatus.classList.add('hidden');
       document.dispatchEvent(new CustomEvent('search-change', {
         detail: { query }
@@ -143,11 +148,13 @@ const { placeholder = "Search profiles..." } = Astro.props;
     
     // Debounced search handler
     searchInput.addEventListener('input', (e) => {
+      console.log('Search input changed:', e.target.value);
       clearTimeout(debounceTimer);
       updateClearButton();
-      
+
       debounceTimer = setTimeout(() => {
         const query = e.target.value.trim().toLowerCase();
+        console.log('Performing search for:', query);
         performSearch(query);
       }, 300);
     });
