@@ -7,9 +7,10 @@
 import Base from '@/layouts/Base.astro';
 import ProfileChart from '@/components/charts/ProfileChart.astro';
 import Badge from '@/components/ui/Badge.astro';
-import { resolveDownloadPath, getFilename } from '@/utils/download';
+import { buildProfileAssetPath, resolveDownloadPath } from '@/utils/download';
 import { readdir, readFile } from 'fs/promises';
 import { join } from 'path';
+import { sortProfileVersions } from '@/utils/versioning';
 import '@/styles/components/profile-detail.css';
 
 // Generate static paths for all profiles
@@ -54,7 +55,10 @@ export async function getStaticPaths() {
   }
 }
 
-const { profile } = Astro.props;
+const { profile: initialProfile } = Astro.props;
+const profile = initialProfile.versions?.length
+  ? { ...initialProfile, versions: sortProfileVersions(initialProfile.versions) }
+  : initialProfile;
 
 // Determine profile pattern
 const hasVersions = profile.versions && profile.versions.length > 0;
@@ -101,6 +105,21 @@ const complexityVariant = {
   mid: 'warning',
   high: 'error',
 }[profile.complexity] || 'default';
+
+function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
+  const label = variant.label || '';
+  const doseRange = variant.doseRange?.trim();
+
+  if (!doseRange) {
+    return label;
+  }
+
+  if (label.toLowerCase().includes(doseRange.toLowerCase())) {
+    return label;
+  }
+
+  return `${doseRange} · ${label}`;
+}
 ---
 
 <Base 
@@ -223,7 +242,7 @@ const complexityVariant = {
                   data-notes={variant.notes}
                   selected={index === 0}
                 >
-                  {variant.label}
+                  {formatVariantLabel(variant)}
                 </option>
               ))}
             </select>
@@ -260,7 +279,7 @@ const complexityVariant = {
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
             {defaultVariant?.doseRange && (
               <div class="bg-base-200 rounded px-2 py-1">
-                <div class="text-xs opacity-60">Dose</div>
+                <div class="text-xs opacity-60">Dose Range</div>
                 <div class="font-medium">{defaultVariant.doseRange}</div>
               </div>
             )}
@@ -347,6 +366,23 @@ const complexityVariant = {
       currentVariants = profileData.variants;
     }
 
+    function encodePathSegments(path) {
+      return path
+        .split('/')
+        .map((segment) => encodeURIComponent(segment))
+        .join('/');
+    }
+
+    function buildProfileAssetPath(profileName, relativePath = '') {
+      const encodedProfileName = encodeURIComponent(profileName);
+
+      if (!relativePath) {
+        return `/gm-profile-database/profiles/${encodedProfileName}/`;
+      }
+
+      return `/gm-profile-database/profiles/${encodedProfileName}/${encodePathSegments(relativePath)}`;
+    }
+
     /**
      * Read variant data from selected option
      */
@@ -363,6 +399,21 @@ const complexityVariant = {
         grindSize: option.dataset.grind,
         notes: option.dataset.notes
       };
+    }
+
+    function formatVariantLabel(variant) {
+      const label = variant?.label || '';
+      const doseRange = variant?.doseRange?.trim();
+
+      if (!doseRange) {
+        return label;
+      }
+
+      if (label.toLowerCase().includes(doseRange.toLowerCase())) {
+        return label;
+      }
+
+      return `${doseRange} · ${label}`;
     }
     
     /**
@@ -381,7 +432,7 @@ const complexityVariant = {
 
         if (variant.doseRange) {
           html += `<div class="bg-base-200 rounded px-2 py-1">
-            <div class="text-xs opacity-60">Dose</div>
+            <div class="text-xs opacity-60">Dose Range</div>
             <div class="font-medium">${variant.doseRange}</div>
           </div>`;
         }
@@ -432,7 +483,7 @@ const complexityVariant = {
       const chartContainer = document.querySelector('.chart-container');
       if (!chartContainer || !variantFile) return;
       
-      const profilePath = `/gm-profile-database/profiles/${profileData.slug}/${variantFile}`;
+      const profilePath = buildProfileAssetPath(profileData.slug, variantFile);
       chartContainer.setAttribute('data-profile-path', profilePath);
       
       if (window.reloadChart) window.reloadChart();
@@ -450,11 +501,11 @@ const complexityVariant = {
       if (variant.downloadPath) {
         downloadPath = variant.downloadPath;
       } else if (variant.file) {
-        downloadPath = `/gm-profile-database/profiles/${profileData.slug}/${variant.file}`;
+        downloadPath = buildProfileAssetPath(profileData.slug, variant.file);
       } else if (profileData.downloadPath) {
         downloadPath = profileData.downloadPath;
       } else {
-        downloadPath = `/gm-profile-database/profiles/${profileData.slug}/`;
+        downloadPath = buildProfileAssetPath(profileData.slug);
       }
       
       downloadButton.setAttribute('href', downloadPath);
@@ -475,7 +526,7 @@ const complexityVariant = {
         if (variantSelect && currentVariants.length > 0) {
           // Rebuild variant options
           variantSelect.innerHTML = currentVariants.map((v, i) => 
-            `<option value="${v.id}" data-file="${v.file}" data-download-path="${v.downloadPath || ''}" data-dose="${v.doseRange || ''}" data-ratio="${v.brewRatio || ''}" data-temp="${v.tempRange || ''}" data-time="${v.timeRange || ''}" data-grind="${v.grindSize || ''}" data-notes="${v.notes || ''}" ${i === 0 ? 'selected' : ''}>${v.label}</option>`
+            `<option value="${v.id}" data-file="${v.file}" data-download-path="${v.downloadPath || ''}" data-dose="${v.doseRange || ''}" data-ratio="${v.brewRatio || ''}" data-temp="${v.tempRange || ''}" data-time="${v.timeRange || ''}" data-grind="${v.grindSize || ''}" data-notes="${v.notes || ''}" ${i === 0 ? 'selected' : ''}>${formatVariantLabel(v)}</option>`
           ).join('');
           
           // Get first variant and update everything

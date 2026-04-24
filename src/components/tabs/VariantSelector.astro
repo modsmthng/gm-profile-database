@@ -22,6 +22,21 @@ interface Props {
 const { variants, defaultVariant } = Astro.props;
 const activeVariant = defaultVariant || variants[0]?.id;
 const activeVariantData = variants.find(v => v.id === activeVariant) || variants[0];
+
+function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
+  const label = variant.label || '';
+  const doseRange = variant.doseRange?.trim();
+
+  if (!doseRange) {
+    return label;
+  }
+
+  if (label.toLowerCase().includes(doseRange.toLowerCase())) {
+    return label;
+  }
+
+  return `${doseRange} · ${label}`;
+}
 ---
 
 <div class="variant-selector-container mb-6">
@@ -39,7 +54,7 @@ const activeVariantData = variants.find(v => v.id === activeVariant) || variants
         data-file={variant.file}
         selected={variant.id === activeVariant}
       >
-        {variant.label}
+        {formatVariantLabel(variant)}
       </option>
     ))}
   </select>
@@ -50,7 +65,7 @@ const activeVariantData = variants.find(v => v.id === activeVariant) || variants
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
         {activeVariantData.doseRange && (
           <div class="stat bg-base-200 rounded-lg p-3">
-            <div class="stat-title text-xs">Dose</div>
+            <div class="stat-title text-xs">Dose Range</div>
             <div class="stat-value text-lg">{activeVariantData.doseRange}</div>
           </div>
         )}

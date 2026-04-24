@@ -3,6 +3,23 @@
  * Implements priority-based download path resolution as documented
  */
 
+function encodePathSegments(path) {
+  return path
+    .split('/')
+    .map((segment) => encodeURIComponent(segment))
+    .join('/');
+}
+
+export function buildProfileAssetPath(profileName, relativePath = '') {
+  const encodedProfileName = encodeURIComponent(profileName);
+
+  if (!relativePath) {
+    return `/gm-profile-database/profiles/${encodedProfileName}/`;
+  }
+
+  return `/gm-profile-database/profiles/${encodedProfileName}/${encodePathSegments(relativePath)}`;
+}
+
 /**
  * Resolves the download path for a profile variant using priority-based logic.
  * 
@@ -24,7 +41,7 @@ export function resolveDownloadPath(profile, selectedVariant = null) {
   
   // Priority 2: Build from variant file path
   if (selectedVariant?.file) {
-    return `/gm-profile-database/profiles/${profile.name}/${selectedVariant.file}`;
+    return buildProfileAssetPath(profile.name, selectedVariant.file);
   }
   
   // Priority 3: Profile-level downloadPath (may be folder)
@@ -33,7 +50,7 @@ export function resolveDownloadPath(profile, selectedVariant = null) {
   }
   
   // Priority 4: Default to profile directory
-  return `/gm-profile-database/profiles/${profile.name}/`;
+  return buildProfileAssetPath(profile.name);
 }
 
 /**
@@ -53,5 +70,11 @@ export function isFolder(path) {
  * @returns {string} The filename
  */
 export function getFilename(path) {
-  return path.split('/').pop() || path;
+  const filename = path.split('/').pop() || path;
+
+  try {
+    return decodeURIComponent(filename);
+  } catch {
+    return filename;
+  }
 }

@@ -3,6 +3,8 @@ import { validator } from './schema';
 import { buildJson } from './output';
 import { splitComma, isValidUrl } from './utils';
 
+const VERSION_ID_RE = /^(?:v\d+(?:\.\d+)*(?:-[a-z]+)?|v\d+(?:_\d+)?|vIT\d+(?:_\d+)+)$/;
+
 export function getFieldErrors(state: AppState): FieldErrors {
   const errors: FieldErrors = {};
   const { base, pattern } = state;
@@ -53,8 +55,8 @@ export function getFieldErrors(state: AppState): FieldErrors {
       const vp = `versions.${vi}`;
       if (!ver.id) {
         errors[`${vp}.id`] = 'Required';
-      } else if (!/^v\d+(\.\d+)*(-[a-z]+)?$/.test(ver.id)) {
-        errors[`${vp}.id`] = 'Format: v1.0 or v2.0-beta';
+      } else if (!VERSION_ID_RE.test(ver.id)) {
+        errors[`${vp}.id`] = 'Format: v1.0, v3_1, or vIT3_0_30_11';
       }
       if (!ver.label) errors[`${vp}.label`] = 'Required';
       if (!ver.releaseDate) {

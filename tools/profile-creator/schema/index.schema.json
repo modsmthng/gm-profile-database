@@ -111,7 +111,7 @@
             "type": "object",
             "required": ["id", "label", "releaseDate", "variants"],
             "properties": {
-              "id": { "type": "string", "pattern": "^v\\d+(\\.\\d+)*(-[a-z]+)?$" },
+              "id": { "type": "string", "pattern": "^(?:v\\d+(?:\\.\\d+)*(?:-[a-z]+)?|v\\d+(?:_\\d+)?|vIT\\d+(?:_\\d+)+)$" },
               "label": { "type": "string" },
               "releaseDate": { "type": "string", "format": "date" },
               "status": { "type": "string", "enum": ["stable", "beta", "experimental"] },
