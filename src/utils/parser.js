@@ -5,6 +5,7 @@
 
 import { readdir } from 'fs/promises';
 import { join } from 'path';
+import { sortProfileVersions } from './versioning';
 
 /**
  * Loads all profile index files from the profiles directory
@@ -77,7 +78,7 @@ export function getDefaultVariant(profile) {
   }
   
   if (profile.versions && profile.versions.length > 0) {
-    const defaultVersion = profile.versions[0];
+    const defaultVersion = sortProfileVersions(profile.versions)[0];
     if (defaultVersion.variants && defaultVersion.variants.length > 0) {
       return defaultVersion.variants[0];
     }

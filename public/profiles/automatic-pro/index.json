@@ -5,244 +5,157 @@
   "author": "modsmthng",
   "link": "https://discord.com/channels/951416527721230336/1408032674131480647",
   "picture": "images/AP_render_var3.png",
-  "date": "2026-04-22",
+  "date": "2026-04-24",
   "complexity": "high",
   "tags": ["automatic", "pro", "adaptive", "flow-profiling"],
   "versions": [
     {
-      "id": "v3.0.29.6",
-      "label": "Version 3.0.29.6 (Latest)",
-      "releaseDate": "2026-04-22",
+      "id": "v2",
+      "label": "v2",
+      "releaseDate": "2026-04-15",
       "status": "stable",
-      "changelog": "Latest stable release with full variant support across all doses and machine types",
+      "changelog": "Legacy Automatic Pro release with dose-based variants.",
       "variants": [
         {
-          "id": "9g-direct",
-          "file": "v3.0.29.6/9g-direct.json",
-          "label": "9g Direct Lever",
-          "doseRange": "9g",
-          "notes": "Single shot for direct lever machines"
+          "id": "9g",
+          "file": "v2/Automatic Pro v2 9g.json",
+          "label": "9g",
+          "doseRange": "9g"
         },
         {
-          "id": "18g-direct",
-          "file": "v3.0.29.6/18g-direct.json",
-          "label": "18g Direct Lever",
-          "doseRange": "18g",
-          "notes": "Optimized for direct lever machines"
+          "id": "15g",
+          "file": "v2/Automatic Pro v2 15g.json",
+          "label": "15g",
+          "doseRange": "15g"
         },
         {
-          "id": "18g-spring",
-          "file": "v3.0.29.6/18g-spring.json",
-          "label": "18g Spring Lever",
-          "doseRange": "18g",
-          "notes": "Spring lever variant"
-        },
-        {
-          "id": "20g-9bar",
-          "file": "v3.0.29.6/20g-9bar.json",
-          "label": "20g 9 Bar",
-          "doseRange": "20g",
-          "notes": "Classic 9 bar pressure"
-        },
-        {
-          "id": "20g-adaptive",
-          "file": "v3.0.29.6/20g-adaptive.json",
-          "label": "20g Adaptive Pressure",
-          "doseRange": "20g",
-          "notes": "Adaptive pressure profiling"
-        },
-        {
-          "id": "20g-direct",
-          "file": "v3.0.29.6/20g-direct.json",
-          "label": "20g Direct Lever",
-          "doseRange": "20g",
-          "notes": "Direct lever optimized"
-        },
-        {
-          "id": "20g-spring",
-          "file": "v3.0.29.6/20g-spring.json",
-          "label": "20g Spring Lever",
-          "doseRange": "20g",
-          "notes": "Spring lever variant"
-        },
-        {
-          "id": "21g-direct",
-          "file": "v3.0.29.6/21g-direct.json",
-          "label": "21g Direct Lever",
-          "doseRange": "21g",
-          "notes": "Direct lever high dose"
-        },
-        {
-          "id": "21g-spring",
-          "file": "v3.0.29.6/21g-spring.json",
-          "label": "21g Spring Lever",
-          "doseRange": "21g",
-          "notes": "Spring lever high dose"
-        }
-      ]
-    },
-    {
-      "id": "v3.0.29.5",
-      "label": "Version 3.0.29.5",
-      "releaseDate": "2026-04-20",
-      "status": "stable",
-      "changelog": "Spring lever optimizations",
-      "variants": [
-        {
-          "id": "18g-spring",
-          "file": "v3.0.29.5/18g-spring.json",
-          "label": "18g Spring Lever",
+          "id": "18g",
+          "file": "v2/Automatic Pro v2 18g.json",
+          "label": "18g",
           "doseRange": "18g"
         },
         {
-          "id": "20g-spring",
-          "file": "v3.0.29.5/20g-spring.json",
-          "label": "20g Spring Lever",
+          "id": "20g",
+          "file": "v2/Automatic Pro v2 20g.json",
+          "label": "20g",
           "doseRange": "20g"
         },
         {
-          "id": "21g-spring",
-          "file": "v3.0.29.5/21g-spring.json",
-          "label": "21g Spring Lever",
-          "doseRange": "21g"
+          "id": "22g",
+          "file": "v2/Automatic Pro v2 22g.json",
+          "label": "22g",
+          "doseRange": "22g"
         }
       ]
     },
     {
-      "id": "v3.0.29.4",
-      "label": "Version 3.0.29.4",
-      "releaseDate": "2026-04-19",
-      "status": "stable",
-      "changelog": "Added adaptive pressure variants",
-      "variants": [
-        {
-          "id": "18g-spring",
-          "file": "v3.0.29.4/18g-spring.json",
-          "label": "18g Spring Lever",
-          "doseRange": "18g"
-        },
-        {
-          "id": "20g-adaptive",
-          "file": "v3.0.29.4/20g-adaptive.json",
-          "label": "20g Adaptive Pressure",
-          "doseRange": "20g"
-        },
-        {
-          "id": "20g-spring",
-          "file": "v3.0.29.4/20g-spring.json",
-          "label": "20g Spring Lever",
-          "doseRange": "20g"
-        },
-        {
-          "id": "21g-spring",
-          "file": "v3.0.29.4/21g-spring.json",
-          "label": "21g Spring Lever",
-          "doseRange": "21g"
-        }
-      ]
-    },
-    {
-      "id": "v3.0.29.3",
-      "label": "Version 3.0.29.3",
-      "releaseDate": "2026-04-18",
-      "status": "stable",
-      "changelog": "Major update with multiple machine type support and dose options",
+      "id": "vIT3_0_29_6",
+      "label": "vIT3_0_29_6",
+      "releaseDate": "2026-04-21",
+      "status": "beta",
+      "changelog": "Expanded testing build with direct, spring, adaptive, and 9 bar variants.",
       "variants": [
         {
           "id": "9g-direct",
-          "file": "v3.0.29.3/9g-direct.json",
+          "file": "vIT3_0_29_6/Automatic Pro 9g [Direct Lever] vIT3_0_29_6.json",
           "label": "9g Direct Lever",
           "doseRange": "9g"
         },
         {
           "id": "18g-direct",
-          "file": "v3.0.29.3/18g-direct.json",
+          "file": "vIT3_0_29_6/Automatic Pro 18g [Direct Lever] vIT3_0_29_6.json",
           "label": "18g Direct Lever",
           "doseRange": "18g"
         },
         {
           "id": "18g-spring",
-          "file": "v3.0.29.3/18g-spring.json",
+          "file": "vIT3_0_29_6/Automatic Pro 18g [Spring Lever] vIT3_0_29_6.json",
           "label": "18g Spring Lever",
           "doseRange": "18g"
         },
         {
           "id": "20g-9bar",
-          "file": "v3.0.29.3/20g-9bar.json",
+          "file": "vIT3_0_29_6/Automatic Pro 20g [9 bar] vIT3_0_29_6.json",
           "label": "20g 9 Bar",
           "doseRange": "20g"
         },
         {
           "id": "20g-adaptive",
-          "file": "v3.0.29.3/20g-adaptive.json",
+          "file": "vIT3_0_29_6/Automatic Pro 20g [Adaptive Pressure] vIT3_0_29_6.json",
           "label": "20g Adaptive Pressure",
           "doseRange": "20g"
         },
         {
           "id": "20g-direct",
-          "file": "v3.0.29.3/20g-direct.json",
+          "file": "vIT3_0_29_6/Automatic Pro 20g [Direct Lever] vIT3_0_29_6.json",
           "label": "20g Direct Lever",
           "doseRange": "20g"
         },
         {
           "id": "20g-spring",
-          "file": "v3.0.29.3/20g-spring.json",
+          "file": "vIT3_0_29_6/Automatic Pro 20g [Spring Lever] vIT3_0_29_6.json",
           "label": "20g Spring Lever",
           "doseRange": "20g"
         },
         {
           "id": "21g-direct",
-          "file": "v3.0.29.3/21g-direct.json",
+          "file": "vIT3_0_29_6/Automatic Pro 21g  [Direct Lever] vIT3_0_29_6.json",
           "label": "21g Direct Lever",
           "doseRange": "21g"
         },
         {
           "id": "21g-spring",
-          "file": "v3.0.29.3/21g-spring.json",
+          "file": "vIT3_0_29_6/Automatic Pro 21g [Spring Lever] vIT3_0_29_6.json",
           "label": "21g Spring Lever",
           "doseRange": "21g"
         }
       ]
     },
     {
-      "id": "v3.0.29.1",
-      "label": "Version 3.0.29.1",
-      "releaseDate": "2026-04-16",
-      "status": "stable",
-      "changelog": "Initial 18g variant",
+      "id": "vIT3_0_29_7",
+      "label": "vIT3_0_29_7",
+      "releaseDate": "2026-04-22",
+      "status": "beta",
+      "changelog": "Focused 9 bar testing update.",
       "variants": [
         {
-          "id": "18g",
-          "file": "v3.0.29.1/18g.json",
-          "label": "18g",
-          "doseRange": "18g"
-        }
-      ]
-    },
-    {
-      "id": "v3.0.29",
-      "label": "Version 3.0.29",
-      "releaseDate": "2026-04-15",
-      "status": "stable",
-      "changelog": "Initial release with 20g and 21g variants",
-      "variants": [
-        {
-          "id": "20g",
-          "file": "v3.0.29/20g.json",
-          "label": "20g",
+          "id": "20g-9bar",
+          "file": "vIT3_0_29_7/Automatic Pro 20g [9 bar] vIT3_0_29_7.json",
+          "label": "20g 9 Bar",
           "doseRange": "20g"
+        }
+      ]
+    },
+    {
+      "id": "vIT3_0_30_11",
+      "label": "vIT3_0_30_11",
+      "releaseDate": "2026-04-24",
+      "status": "beta",
+      "changelog": "Current in-testing build with machine-type variants.",
+      "variants": [
+        {
+          "id": "9bar",
+          "file": "vIT3_0_30_11/Automatic Pro [9 bar] vIT3_0_30_11.json",
+          "label": "9 Bar",
+          "doseRange": "All doses"
         },
         {
-          "id": "21g",
-          "file": "v3.0.29/21g.json",
-          "label": "21g",
-          "doseRange": "21g"
+          "id": "adaptive",
+          "file": "vIT3_0_30_11/Automatic Pro [Adaptive Pressure] vIT3_0_30_11.json",
+          "label": "Adaptive Pressure",
+          "doseRange": "All doses"
         },
         {
-          "id": "21g-spring",
-          "file": "v3.0.29/21g-spring.json",
-          "label": "21g Spring Lever",
-          "doseRange": "21g"
+          "id": "direct",
+          "file": "vIT3_0_30_11/Automatic Pro [Direct Lever] vIT3_0_30_11.json",
+          "label": "Direct Lever",
+          "doseRange": "All doses"
+        },
+        {
+          "id": "spring",
+          "file": "vIT3_0_30_11/Automatic Pro [Spring Lever] vIT3_0_30_11.json",
+          "label": "Spring Lever",
+          "doseRange": "All doses"
         }
       ]
     }

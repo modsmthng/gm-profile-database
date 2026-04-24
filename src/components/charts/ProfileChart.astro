@@ -4,6 +4,7 @@
  * Renders an interactive Chart.js visualization of profile data
  */
 import '@/styles/components/profile-chart.css';
+import { buildProfileAssetPath } from '@/utils/download';
 
 interface Props {
   profileName: string;
@@ -11,7 +12,7 @@ interface Props {
 }
 
 const { profileName, variantFile } = Astro.props;
-const profilePath = `/gm-profile-database/profiles/${profileName}/${variantFile}`;
+const profilePath = buildProfileAssetPath(profileName, variantFile);
 ---
 
 <div class="chart-container" data-profile-path={profilePath}>
@@ -151,4 +152,3 @@ const profilePath = `/gm-profile-database/profiles/${profileName}/${variantFile}
     loadProfileChart();
   }
 </script>
-
