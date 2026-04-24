@@ -134,18 +134,6 @@
       "changelog": "Current in-testing build with machine-type variants.",
       "variants": [
         {
-          "id": "9bar",
-          "file": "vIT3_0_30_11/Automatic Pro [9 bar] vIT3_0_30_11.json",
-          "label": "9 Bar",
-          "doseRange": "All doses"
-        },
-        {
-          "id": "adaptive",
-          "file": "vIT3_0_30_11/Automatic Pro [Adaptive Pressure] vIT3_0_30_11.json",
-          "label": "Adaptive Pressure",
-          "doseRange": "All doses"
-        },
-        {
           "id": "direct",
           "file": "vIT3_0_30_11/Automatic Pro [Direct Lever] vIT3_0_30_11.json",
           "label": "Direct Lever",
@@ -155,6 +143,18 @@
           "id": "spring",
           "file": "vIT3_0_30_11/Automatic Pro [Spring Lever] vIT3_0_30_11.json",
           "label": "Spring Lever",
+          "doseRange": "All doses"
+        },
+        {
+          "id": "9bar",
+          "file": "vIT3_0_30_11/Automatic Pro [9 bar] vIT3_0_30_11.json",
+          "label": "9 Bar",
+          "doseRange": "All doses"
+        },
+        {
+          "id": "adaptive",
+          "file": "vIT3_0_30_11/Automatic Pro [Adaptive Pressure] vIT3_0_30_11.json",
+          "label": "Adaptive Pressure",
           "doseRange": "All doses"
         }
       ]
