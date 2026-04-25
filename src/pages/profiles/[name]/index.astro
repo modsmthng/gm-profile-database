@@ -122,7 +122,7 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
 }
 ---
 
-<Base 
+<Base
   title={`${profile.displayName} - Gaggimate Profile Store`}
   description={profile.description}
 >
@@ -137,65 +137,79 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
   <!-- Profile Header -->
   <div class="card bg-base-100 shadow-lg mb-4 profile-header" data-pagefind-body>
     <div class="card-body">
-      <div class="flex flex-col md:flex-row justify-between items-start gap-4">
-        <div class="flex-1">
-          <h1 class="text-3xl font-bold mb-2" data-pagefind-meta="title">{profile.displayName}</h1>
-          <p class="text-base-content/70 mb-4">{profile.description}</p>
-          
-          <!-- Metadata -->
-          <div class="flex flex-wrap gap-3 items-center">
-            <div class="flex items-center gap-2">
-              <span class="text-sm font-semibold text-base-content/70">Profile Complexity:</span>
-              <Badge variant={complexityVariant as any} size="md" data-pagefind-filter="complexity">
-                {profile.complexity}
-              </Badge>
-            </div>
-
-            <div class="text-sm text-base-content/60">
-              by <span class="font-semibold" data-pagefind-filter="author">{profile.author}</span>
-            </div>
-
-            <div class="text-sm text-base-content/60">
-              {formattedDate}
-            </div>
-          </div>
-          
-          <!-- Tags -->
-          <div class="flex flex-wrap gap-2 mt-4">
-            {profile.tags.map((tag: string) => (
-              <Badge variant="outline" size="sm" data-pagefind-filter="tag">{tag}</Badge>
-            ))}
-          </div>
-        </div>
-        
-        <!-- Download Button (Pattern A only) -->
-        {isPatternA && (
-          <div class="flex flex-col gap-2">
-            <a 
-              id="download-button"
-              href={downloadPath}
-              download
-              class="btn btn-primary btn-lg"
-              aria-label={`Download ${profile.displayName} profile`}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              Download Profile
-            </a>
-            
-            {profile.link && (
-              <a 
-                href={profile.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-outline btn-sm"
-              >
-                💬 Discuss
-              </a>
-            )}
+      <div class="flex flex-col md:flex-row gap-6">
+        <!-- Profile Picture -->
+        {profile.picture && (
+          <div class="flex-shrink-0 w-full md:w-52 lg:w-64">
+            <img
+              src={profile.picture}
+              alt={`${profile.displayName} profile picture`}
+              class="w-full h-auto rounded-lg object-cover"
+            />
           </div>
         )}
+
+        <!-- Info + Actions -->
+        <div class="flex-1 flex flex-col md:flex-row justify-between items-start gap-4">
+          <div class="flex-1">
+            <h1 class="text-3xl font-bold mb-2" data-pagefind-meta="title">{profile.displayName}</h1>
+            <p class="text-base-content/70 mb-4">{profile.description}</p>
+
+            <!-- Metadata -->
+            <div class="flex flex-wrap gap-3 items-center">
+              <div class="flex items-center gap-2">
+                <span class="text-sm font-semibold text-base-content/70">Profile Complexity:</span>
+                <Badge variant={complexityVariant as any} size="md" data-pagefind-filter="complexity">
+                  {profile.complexity}
+                </Badge>
+              </div>
+
+              <div class="text-sm text-base-content/60">
+                by <span class="font-semibold" data-pagefind-filter="author">{profile.author}</span>
+              </div>
+
+              <div class="text-sm text-base-content/60">
+                {formattedDate}
+              </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mt-4">
+              {profile.tags.map((tag: string) => (
+                <Badge variant="outline" size="sm" data-pagefind-filter="tag">{tag}</Badge>
+              ))}
+            </div>
+          </div>
+
+          <!-- Download Button (Pattern A only) -->
+          {isPatternA && (
+            <div class="flex flex-col gap-2">
+              <a
+                id="download-button"
+                href={downloadPath}
+                download
+                class="btn btn-primary btn-lg"
+                aria-label={`Download ${profile.displayName} profile`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download Profile
+              </a>
+
+              {profile.link && (
+                <a
+                  href={profile.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-outline btn-sm"
+                >
+                  💬 Discuss
+                </a>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   </div>
@@ -230,8 +244,8 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
             </label>
             <select id="variant-select" class="select select-bordered select-sm w-full">
               {allVariantsForDisplay.map((variant: any, index: number) => (
-                <option 
-                  value={variant.id} 
+                <option
+                  value={variant.id}
                   data-file={variant.file}
                   data-download-path={variant.downloadPath}
                   data-dose={variant.doseRange}
@@ -301,17 +315,19 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
                 <div class="font-medium">{defaultVariant.timeRange}</div>
               </div>
             )}
+            {defaultVariant?.grindSize && (
+              <div class="bg-base-200 rounded px-2 py-1">
+                <div class="text-xs opacity-60">Grind</div>
+                <div class="font-medium">{defaultVariant.grindSize}</div>
+              </div>
+            )}
+            {defaultVariant?.notes && (
+              <div class="bg-base-200 rounded px-2 py-1 col-span-2 sm:col-span-4">
+                <div class="text-xs opacity-60">Notes</div>
+                <div class="font-normal">{defaultVariant.notes}</div>
+              </div>
+            )}
           </div>
-          {defaultVariant?.grindSize && (
-            <div class="mt-2 text-sm">
-              <span class="font-medium">Grind:</span> {defaultVariant.grindSize}
-            </div>
-          )}
-          {defaultVariant?.notes && (
-            <div class="mt-2 text-sm opacity-70">
-              {defaultVariant.notes}
-            </div>
-          )}
         </div>
       </div>
     </div>
@@ -322,7 +338,7 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
     <div class="card-body">
       <h2 class="card-title mb-4">Profile Visualization</h2>
       <div id="chart-wrapper">
-        <ProfileChart 
+        <ProfileChart
           profileName={profile.slug}
           variantFile={defaultFile}
         />
@@ -356,9 +372,9 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
     const profileData = profile;
     const hasVersions = isPatternC;
     const hasVariants = isPatternB || isPatternC;
-    
+
     let currentVariants = [];
-    
+
     // Initialize current variants
     if (hasVersions) {
       currentVariants = profileData.versions[0].variants;
@@ -415,7 +431,7 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
 
       return `${doseRange} · ${label}`;
     }
-    
+
     /**
      * Update variant details display
      */
@@ -458,15 +474,21 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
           </div>`;
         }
 
-        html += '</div>';
-
         if (variant.grindSize) {
-          html += `<div class="mt-2 text-sm"><span class="font-medium">Grind:</span> ${variant.grindSize}</div>`;
+          html += `<div class="bg-base-200 rounded px-2 py-1">
+            <div class="text-xs opacity-60">Grind</div>
+            <div class="font-medium">${variant.grindSize}</div>
+          </div>`;
         }
 
         if (variant.notes) {
-          html += `<div class="mt-2 text-sm opacity-70">${variant.notes}</div>`;
+          html += `<div class="bg-base-200 rounded px-2 py-1 col-span-2 sm:col-span-4">
+            <div class="text-xs opacity-60">Notes</div>
+            <div class="font-normal">${variant.notes}</div>
+          </div>`;
         }
+
+        html += '</div>';
 
         detailsContainer.innerHTML = html;
 
@@ -475,28 +497,28 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
         detailsContainer.classList.add('variant-entering');
       }, 50);
     }
-    
+
     /**
      * Update chart with new variant data
      */
     function updateChart(variantFile) {
       const chartContainer = document.querySelector('.chart-container');
       if (!chartContainer || !variantFile) return;
-      
+
       const profilePath = buildProfileAssetPath(profileData.slug, variantFile);
       chartContainer.setAttribute('data-profile-path', profilePath);
-      
+
       if (window.reloadChart) window.reloadChart();
       else if (window.retryChart) window.retryChart();
     }
-    
+
     /**
      * Update download button
      */
     function updateDownloadButton(variant) {
       const downloadButton = document.getElementById('download-button');
       if (!downloadButton || !variant) return;
-      
+
       let downloadPath;
       if (variant.downloadPath) {
         downloadPath = variant.downloadPath;
@@ -507,10 +529,10 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
       } else {
         downloadPath = buildProfileAssetPath(profileData.slug);
       }
-      
+
       downloadButton.setAttribute('href', downloadPath);
     }
-    
+
     /**
      * Handle version selection change
      */
@@ -519,16 +541,16 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
       versionSelect.addEventListener('change', (e) => {
         const versionIndex = parseInt(e.target.value);
         const version = profileData.versions[versionIndex];
-        
+
         currentVariants = version.variants;
         const variantSelect = document.getElementById('variant-select');
-        
+
         if (variantSelect && currentVariants.length > 0) {
           // Rebuild variant options
-          variantSelect.innerHTML = currentVariants.map((v, i) => 
+          variantSelect.innerHTML = currentVariants.map((v, i) =>
             `<option value="${v.id}" data-file="${v.file}" data-download-path="${v.downloadPath || ''}" data-dose="${v.doseRange || ''}" data-ratio="${v.brewRatio || ''}" data-temp="${v.tempRange || ''}" data-time="${v.timeRange || ''}" data-grind="${v.grindSize || ''}" data-notes="${v.notes || ''}" ${i === 0 ? 'selected' : ''}>${formatVariantLabel(v)}</option>`
           ).join('');
-          
+
           // Get first variant and update everything
           const firstVariant = currentVariants[0];
           updateVariantDetails(firstVariant);
@@ -537,7 +559,7 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
         }
       });
     }
-    
+
     /**
      * Handle variant selection change
      */
@@ -545,7 +567,7 @@ function formatVariantLabel(variant: { label?: string; doseRange?: string }) {
     if (variantSelectEl) {
       variantSelectEl.addEventListener('change', (e) => {
         const variant = getVariantDataFromSelect(e.target);
-        
+
         if (variant && variant.file) {
           updateVariantDetails(variant);
           updateChart(variant.file);
